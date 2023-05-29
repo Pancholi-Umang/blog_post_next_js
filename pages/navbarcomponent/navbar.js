@@ -2,10 +2,11 @@ import Link from "next/link";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import styles from './navbar.module.css';
 
 function Navbr() {
   return (
-    <Navbar className="createBg" expand="lg">
+    <Navbar className={styles.navbarBackground} expand="lg">
       <Container>
         <Link className="navbar-brand" href="./components/home">
           Shopping

@@ -53,9 +53,7 @@
     color: rgba(142, 136, 136, 0.65);
 }
 
-.createBg {
-    background-color: #f2ecec !important;
-}
+
 
 .text_box {
     height: 35px;
@@ -106,9 +104,6 @@
     text-align: center;
 }
 
-.colorOfHeader {
-    color: #b08967;
-}
 
 .p {
     font-size: 11px;
