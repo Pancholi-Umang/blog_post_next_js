@@ -32,6 +32,9 @@ function Navbr() {
             <Link href="/components/workwithme" className="nav-link">
               WORK WITH ME
             </Link>
+            <Link href="/components/cart" className="nav-link">
+              CART
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

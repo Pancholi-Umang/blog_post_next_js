@@ -28,11 +28,13 @@ const home = () => {
                 height={300}
                 layout="responsive"
               />
-              <Card.Body className={`${styles.setText }`}>
+              <Card.Body className={`${styles.setText}`}>
                 <Link className={`${styles.Linktag}`} href="components/food">
                   FOOD
                 </Link>
-                <Card.Title><h6>Spaghetti Sauce With Ground Beef</h6></Card.Title>
+                <Card.Title>
+                  <h6>Spaghetti Sauce With Ground Beef</h6>
+                </Card.Title>
                 <Card.Text className={`${styles.cardInnerText}`}>
                   Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod
                   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -52,7 +54,7 @@ const home = () => {
                 height={300}
                 layout="responsive"
               />
-              <Card.Body className={`${styles.setText }`}>
+              <Card.Body className={`${styles.setText}`}>
                 <Link className={`${styles.Linktag}`} href="components/drink">
                   DRINK
                 </Link>
@@ -78,7 +80,7 @@ const home = () => {
                 height={300}
                 layout="responsive"
               />
-              <Card.Body className={`${styles.setText }`}>
+              <Card.Body className={`${styles.setText}`}>
                 <Link className={`${styles.Linktag}`} href="components/drink">
                   DRINK
                 </Link>

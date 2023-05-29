@@ -9,4 +9,14 @@
 .ChangeColorbelowH3{
     color: rgb(179, 176, 176);
     font-weight: 400;
+    margin-bottom: 0px;
+}
+
+.buttonaddcart{
+    border: none;
+    color:#b08967;
+    border-bottom: 1px solid #b08967;
+    font-size: 13px;
+    margin-top: 7px;
+    background-color: transparent;
 }
