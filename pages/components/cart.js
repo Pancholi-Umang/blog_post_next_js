@@ -12,6 +12,7 @@ const cart = () => {
                 <span className="h2">Shopping Cart </span>
                 <span className="h4">(1 item in your cart)</span>
               </p>
+              
               <div className="card mb-4">
                 <div className="card-body p-4">
                   <div className="row align-items-center">
@@ -26,18 +27,6 @@ const cart = () => {
                       <div>
                         <p className="small text-muted mb-4 pb-2">Name</p>
                         <p className="lead fw-normal mb-0">iPad Air</p>
-                      </div>
-                    </div>
-                    <div className="col-md-2 d-flex justify-content-center">
-                      <div>
-                        <p className="small text-muted mb-4 pb-2">Color</p>
-                        <p className="lead fw-normal mb-0">
-                          <i
-                            className="fas fa-circle me-2"
-                            style={{ color: "#fdd8d2" }}
-                          />
-                          pink rose
-                        </p>
                       </div>
                     </div>
                     <div className="col-md-2 d-flex justify-content-center">
@@ -125,6 +114,7 @@ const cart = () => {
                   </div>
                 </div>
               </div>
+
               <div className="d-flex justify-content-end">
                 <button type="button" className="btn btn-light me-2">
                   Continue shopping
@@ -133,6 +123,7 @@ const cart = () => {
                   checkout
                 </button>
               </div>
+
             </Col>
           </Row>
         </Container>

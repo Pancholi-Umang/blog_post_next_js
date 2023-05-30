@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/Home.module.css";
 
 const Workwithme = () => {
@@ -11,7 +11,7 @@ const Workwithme = () => {
           className={`d-flex align-items-center ${styles.Brighter_Elem}`}
         >
           <Container className="mt-5">
-            <p className={` text-md-start text-center`}>Contact</p>
+            <p className={` text-md-start text-center mt-5 `}>Contact</p>
             <h3 className={`text-md-start text-center`}>Work With Me</h3>
           </Container>
         </Col>

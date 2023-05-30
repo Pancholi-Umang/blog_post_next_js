@@ -3,11 +3,11 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/food.module.css";
 
+
 export const getServerSideProps = async (req) => {
   const { drink } = req.query;
   const response = await fetch(`http://localhost:5000/drink/${drink}`);
   const data = await response.json();
-
   return {
     props: {
       data,
