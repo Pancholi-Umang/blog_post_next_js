@@ -3,6 +3,9 @@ import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/food.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllDrink } from "../../../action";
+import { BsCheckLg } from "react-icons/bs";
 
 export const getStaticProps = async () => {
   const data = await fetch("http://localhost:5000/drink").then((res) =>
@@ -16,10 +19,11 @@ export const getStaticProps = async () => {
 };
 
 const Index = ({ data }) => {
+  const fetchDrink = useSelector(state=>state.item.drink)
+  const dispatch = useDispatch();
   const router = useRouter();
-  const [drink, setDrinks] = useState([]);
   useEffect(() => {
-    setDrinks(data);
+    dispatch(getAllDrink(data));
   }, []);
 
   return (
@@ -33,7 +37,7 @@ const Index = ({ data }) => {
       </Row>
       <Row className="d-flex align-items-center justify-content-center flex-column">
         <Col lg={10} sm={12}>
-          {drink?.map((drinkValue) => {
+          {fetchDrink?.map((drinkValue) => {
             return (
               <div
                 key={drinkValue?.id}

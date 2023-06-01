@@ -1,7 +1,9 @@
 import Head from "next/head";
 import Home from "./components/home";
 
+
 function index() {
+ 
   return (
     <>
       <Head>
@@ -13,12 +15,10 @@ function index() {
           src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js"
           crossorigin
         ></script>
-
         <script
           src="https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js"
           crossorigin
         ></script>
-
         <script
           src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js"
           crossorigin

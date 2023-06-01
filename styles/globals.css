@@ -111,3 +111,6 @@ body{
 }
 
 
+.form-error{
+  color: red;
+}

@@ -1,12 +1,33 @@
 import Link from "next/link";
 import React from "react";
+import { useFormik } from "formik";
+import { signupSchema } from "../../schemas/register";
+import { postUsersdata } from "../../action";
+import { useDispatch } from "react-redux";
 
-const registration = () => {
+const initialValues = {
+  name: "",
+  email: "",
+  password: "",
+  addcart: [],
+};
+
+const Registration = () => {
+  const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues,
+    validationSchema: signupSchema,
+    onSubmit: (values) => {
+      dispatch(postUsersdata(values));
+      formik?.resetForm();
+    },
+  });
+
   return (
     <div className="register-photo">
       <div className="form-container">
         <div className="image-holder" />
-        <form>
+        <form onSubmit={formik?.handleSubmit}>
           <h2 className="text-center">
             <strong>Create</strong> an account.
           </h2>
@@ -14,26 +35,45 @@ const registration = () => {
             <input
               className="form-control"
               type="text"
-              name="password-repeat"
+              onBlur={formik?.handleBlur}
+              onChange={formik?.handleChange}
+              value={formik?.values?.name}
+              name="name"
               placeholder="Username"
             />
+            {formik?.errors?.name && formik?.touched?.name ? (
+              <p className="form-error"> {formik?.errors?.name} </p>
+            ) : null}
           </div>
           <div className="form-group">
             <input
               className="form-control"
               type="email"
+              value={formik?.values?.email}
+              onChange={formik?.handleChange}
+              onBlur={formik?.handleBlur}
               name="email"
               placeholder="Email"
               autoComplete="off"
             />
+            {formik?.errors?.email && formik?.touched?.email ? (
+              <p className="form-error"> {formik?.errors?.email} </p>
+            ) : null}
           </div>
           <div className="form-group">
             <input
               className="form-control"
               type="password"
+              value={formik?.values?.password}
+              onChange={formik?.handleChange}
+              onBlur={formik?.handleBlur}
               name="password"
+              autoComplete="off"
               placeholder="Password"
             />
+            {formik?.errors?.password && formik?.touched?.password ? (
+              <p className="form-error"> {formik?.errors?.password} </p>
+            ) : null}
           </div>
           <div className="form-group d-flex justify-content-center">
             <button className="btn btn-primary btn-block mb-3" type="submit">
@@ -49,4 +89,4 @@ const registration = () => {
   );
 };
 
-export default registration;
+export default Registration;

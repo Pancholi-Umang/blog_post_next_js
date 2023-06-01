@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/food.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllFood } from "../../../action";
+
+
 export const getStaticProps = async () => {
   const data = await fetch("http://localhost:5000/food").then((res) =>
     res.json()
@@ -15,10 +19,11 @@ export const getStaticProps = async () => {
 };
 
 const Index = ({ data }) => {
+  const fetchFood = useSelector(state=>state?.item?.food)
   const router = useRouter();
-  const [food, setFoods] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setFoods(data);
+    dispatch(getAllFood(data));
   }, []);
 
   return (
@@ -32,7 +37,7 @@ const Index = ({ data }) => {
       </Row>
       <Row className="d-flex align-items-center justify-content-center flex-column">
         <Col lg={10} sm={12}>
-          {food?.map((foodValue) => {
+          {fetchFood?.map((foodValue) => {
             return (
               <div
                 key={foodValue?.id}

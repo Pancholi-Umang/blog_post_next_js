@@ -58,5 +58,14 @@
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
       "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-09.jpg"
     }
+  ],
+  "users": [
+    {
+      "name": "umang",
+      "email": "umang@gmail.com",
+      "password": "12121212",
+      "addcart": [],
+      "id": 1
+    }
   ]
 }

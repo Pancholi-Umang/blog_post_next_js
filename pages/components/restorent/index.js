@@ -3,6 +3,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/food.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { getAllRestorent } from "../../../action";
+import { useDispatch, useSelector } from "react-redux";
 
 export const getStaticProps = async () => {
   const data = await fetch("http://localhost:5000/restorent").then((res) =>
@@ -16,10 +18,11 @@ export const getStaticProps = async () => {
 };
 
 const Index = ({ data }) => {
+  const fetchResto = useSelector(state=>state?.item?.resto)
   const router = useRouter();
-  const [restorent, setRestorent] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setRestorent(data);
+    dispatch(getAllRestorent(data));
   }, []);
   return (
     <Container className="ps-5 pe-5">
@@ -27,13 +30,12 @@ const Index = ({ data }) => {
         className={`d-flex align-items-center justify-content-center flex-column mt-5 ${styles.colorOfHeader}`}
       >
         <Col lg={10} sm={12}>
-          {" "}
-          <h3 className="ps-3">Restorents</h3> <hr />{" "}
+          <h3 className="ps-3">Restorents</h3> <hr />
         </Col>
       </Row>
       <Row className="d-flex align-items-center justify-content-center flex-column">
         <Col lg={10} sm={12}>
-          {restorent?.map((resto) => {
+          {fetchResto?.map((resto) => {
             return (
               <div
                 key={resto?.id}
@@ -50,8 +52,8 @@ const Index = ({ data }) => {
                     layout="responsive"
                   />
                   <h3 className={`mt-3 ${styles.changeH3Color}`}>
-                    {" "}
-                    {resto?.title}{" "}
+                    
+                    {resto?.title}
                   </h3>
                   <p className={styles.ChangeColorbelowH3}>{resto?.text}</p>
                 </div>
