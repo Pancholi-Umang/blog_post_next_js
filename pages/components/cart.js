@@ -1,7 +1,17 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const cart = () => {
+
+  const router = useRouter();
+  const User = useSelector((state) => state?.item?.user);
+
+  useEffect(() => {
+    User?.name == undefined ? router.push("/") : console.log("not logged in");
+  }, [User]);
+
   return (
     <>
       <section className="vh-100">

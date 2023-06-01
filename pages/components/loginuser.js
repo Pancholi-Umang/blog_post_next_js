@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../../styles/login.module.css";
 import { Col, Container, Row } from "react-bootstrap";
 import Link from "next/link";
 import { signupSchema } from "../../schemas/login";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getSingleUsers } from "../../action";
+import { useRouter } from "next/router";
 
 const initialValues = {
   email: "",
@@ -23,6 +24,12 @@ const loginuser = () => {
     },
   });
 
+  const router = useRouter();
+  const User = useSelector((state) => state?.item?.user);
+
+  useEffect(() => {
+    User?.name ? router.push("/") : console.log("not logged in");
+  }, [User]);
   return (
     <Container>
       <Row>

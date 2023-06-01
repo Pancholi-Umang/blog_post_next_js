@@ -1,9 +1,10 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { signupSchema } from "../../schemas/register";
 import { postUsersdata } from "../../action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 const initialValues = {
   name: "",
@@ -22,6 +23,13 @@ const Registration = () => {
       formik?.resetForm();
     },
   });
+
+  const router = useRouter();
+  const User = useSelector(state=>state?.item?.user);
+
+  useEffect(()=>{
+    User?.name ? router.push("/") : console.log("not logged in") 
+  },[User])
 
   return (
     <div className="register-photo">

@@ -114,3 +114,7 @@ body{
 .form-error{
   color: red;
 }
+
+.myPointer{
+  cursor: pointer;
+}
