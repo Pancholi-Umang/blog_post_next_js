@@ -5,6 +5,7 @@ import { signupSchema } from "../../schemas/register";
 import { postUsersdata } from "../../action";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const initialValues = {
   name: "",
@@ -24,14 +25,17 @@ const Registration = () => {
   });
 
   const router = useRouter();
-  const User = useSelector(state=>state?.item?.user);
+  const User = useSelector((state) => state?.item?.user);
 
-  useEffect(()=>{
-    User?.name ? router.push("/") : console.log("not logged in") 
-  },[User])
+  useEffect(() => {
+    User?.name ? router.push("/") : console.log("not logged in");
+  }, [User]);
 
   return (
     <div className="register-photo">
+      <Head>
+        <title>Registration</title>
+      </Head>
       <div className="form-container">
         <div className="image-holder" />
         <form onSubmit={formik?.handleSubmit}>

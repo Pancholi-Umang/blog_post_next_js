@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllDrink } from "../../../action";
-import { BsCheckLg } from "react-icons/bs";
+import Head from "next/head";
 
 export const getStaticProps = async () => {
   const data = await fetch("http://localhost:5000/drink").then((res) =>
@@ -28,6 +28,9 @@ const Index = ({ data }) => {
 
   return (
     <Container className="ps-5 pe-5">
+       <Head>
+        <title>Drink</title>
+      </Head>
       <Row
         className={`d-flex align-items-center justify-content-center flex-column mt-5 ${styles.colorOfHeader}`}
       >

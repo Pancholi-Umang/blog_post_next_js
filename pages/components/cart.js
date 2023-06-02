@@ -1,20 +1,15 @@
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartdata, removeCartItem } from "../../action";
 import axios from "axios";
 import Link from "next/link";
+import Head from "next/head";
 
-const cart = ({ data }) => {
-  const router = useRouter();
+const cart = () => {
   const UserCart = useSelector((state) => state?.item?.usercart);
-  const User = useSelector((state) => state?.item?.user);
   const [buttonQuantity, setButtonQuantity] = useState(1);
-
-  useEffect(() => {
-    User?.name == undefined ? router.push("/") : console.log("logged in");
-  }, [User]);
+  const User = useSelector((state) => state?.item?.user);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -49,12 +44,6 @@ const cart = ({ data }) => {
     dispatch(getCartdata(User?.id));
   }
 
-  useEffect(() => {
-    let numbers = [1, 2, 3];
-    let sum = numbers.reduce(function (previousValue, currentValue) {
-      return previousValue + currentValue;
-    });
-  }, [buttonQuantity]);
 
   let cartTotal = 0;
   let prices = 0;
@@ -62,6 +51,9 @@ const cart = ({ data }) => {
 
   return (
     <>
+    <Head>
+      <title>Cart</title>
+    </Head>
       <section className="vh-100">
         <Container className="mt-5">
           <Row className=" d-flex justify-content-center align-items-center h-100">

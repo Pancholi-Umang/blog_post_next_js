@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleUsers } from "../../action";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const initialValues = {
   email: "",
@@ -32,6 +33,9 @@ const loginuser = () => {
   }, [User]);
   return (
     <Container>
+      <Head>
+        <title>Login</title>
+      </Head>
       <Row>
         <Col md={6} className="offset-md-3">
           <h2 className="text-center text-dark mt-3">Login Form</h2>

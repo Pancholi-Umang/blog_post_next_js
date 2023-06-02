@@ -1,10 +1,14 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/Home.module.css";
+import Head from "next/head";
 
 const About = () => {
   return (
     <Container fluid className="p-0">
+      <Head>
+      <title>About</title>
+    </Head>
       <Row className={`${styles.AddbackImages} p-0`}>
         <Col md={12}>
           <Container>

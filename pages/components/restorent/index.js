@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { getAllRestorent } from "../../../action";
 import { useDispatch, useSelector } from "react-redux";
+import Head from "next/head";
 
 export const getStaticProps = async () => {
   const data = await fetch("http://localhost:5000/restorent").then((res) =>
@@ -26,6 +27,9 @@ const Index = ({ data }) => {
   }, []);
   return (
     <Container className="ps-5 pe-5">
+      <Head>
+        <title>Best Restorent</title>
+      </Head>
       <Row
         className={`d-flex align-items-center justify-content-center flex-column mt-5 ${styles.colorOfHeader}`}
       >

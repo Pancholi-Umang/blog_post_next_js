@@ -6,10 +6,14 @@ import { Col, Row } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 const home = () => {
   return (
     <Container fluid className="p-0">
+      <Head>
+      <title>Home</title>
+    </Head>
       <Row
         className={`${styles.Addbackground} d-flex align-items-center justify-content-center`}
       >

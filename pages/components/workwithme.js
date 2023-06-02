@@ -1,10 +1,14 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/Home.module.css";
+import Head from "next/head";
 
 const Workwithme = () => {
   return (
     <Container fluid className="p-0 ">
+      <Head>
+        <title>Work With Me</title>
+      </Head>
       <Row className={`${styles.AddbackgroundWorkWithMe}`}>
         <Col
           md={12}

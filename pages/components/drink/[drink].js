@@ -4,6 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/food.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { postCartdata } from "../../../action";
+import Head from "next/head";
 
 export const getServerSideProps = async (req) => {
   const { drink } = req.query;
@@ -34,6 +35,9 @@ const DrinkDynamic = ({ data }) => {
 
   return (
     <Container className="p-5 my-5">
+      <Head>
+        <title>Drink</title>
+      </Head>
       <Row className="d-flex align-items-center justify-content-center flex-column bg-white py-5">
         <Col lg={10} sm={12}>
           <div className="my-2" style={{ cursor: "pointer" }}>

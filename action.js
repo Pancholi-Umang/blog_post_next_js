@@ -3,7 +3,6 @@ import * as types from "./actionTypes";
 
 export const getAllFood = (data) => {
   return function (dispatch) {
-    console.log(data,"food")
     dispatch({
       type: types?.FETCH_ALL_FOOD,
       payload: data,
@@ -12,7 +11,6 @@ export const getAllFood = (data) => {
 };
 export const getAllDrink = (data) => {
   return function (dispatch) {
-    console.log(data,"drink")
     dispatch({
       type: types?.FETCH_ALL_DRINK,
       payload: data,
@@ -21,7 +19,6 @@ export const getAllDrink = (data) => {
 };
 export const getAllRestorent = (data) => {
   return function (dispatch) {
-    console.log(data,"restorent")
     dispatch({
       type: types?.FETCH_ALL_RESTORENT,
       payload: data,
@@ -31,7 +28,6 @@ export const getAllRestorent = (data) => {
 
 export const postUsersdata = (data) => {
   return function (dispatch) {
-    console.log(data,"userpost")
     axios?.post(`http://localhost:5000/users`, data).then((res) => {
       dispatch({
         type: types?.POST_USERS_DATA,
@@ -43,7 +39,6 @@ export const postUsersdata = (data) => {
 
 export const getUsersdata = () => {
   return function (dispatch) {
-    console.log(data,"userget")
     axios?.get(`http://localhost:5000/users`).then((res) => {
       dispatch({
         type: types?.GET_USERS_DATA,
@@ -67,7 +62,6 @@ export const getCartdata = (id) => {
 export const postCartdata = (data) => {
   return function (dispatch) {
     axios?.post(`http://localhost:5000/cart`, data).then((res) => {
-      console.log(res?.data)
       dispatch(getCartdata(data?.user_id));
     });
   };

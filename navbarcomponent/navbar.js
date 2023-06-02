@@ -6,11 +6,13 @@ import styles from "./navbar.module.css";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 function Navbr() {
   const User = useSelector((state) => state?.item?.user);
   const [goCart, setGoCart] = useState(false);
   const [Redirected, setRedirected] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (User?.name !== undefined) {
@@ -24,8 +26,10 @@ function Navbr() {
 
   const log_out_function = () => {
     localStorage.removeItem("loginBlog");
-    location.reload();
+    router.push("/")
   };
+
+
 
   const UserCart = useSelector((state) => state?.item?.usercart);
 
@@ -97,7 +101,7 @@ function Navbr() {
             ) : (
               <Link href="/components/cart" className="nav-link position-relative">
                 <BsFillCartPlusFill size={30} />
-                <p className="position-absolute top-0 end-0 pe-1">{UserCart?.length}</p>
+                <p className="top-0 end-0 pe-1 giveRegBg"><span className="text-white">{UserCart?.length}</span></p>
               </Link>
             )}
           </Nav>
