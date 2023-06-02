@@ -10,7 +10,6 @@ const initialValues = {
   name: "",
   email: "",
   password: "",
-  addcart: [],
 };
 
 const Registration = () => {

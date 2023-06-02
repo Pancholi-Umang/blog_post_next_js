@@ -4,3 +4,6 @@ export const FETCH_ALL_DRINK = "FETCH_ALL_DRINK";
 export const POST_USERS_DATA = "POST_USERS_DATA";
 export const SINGLE_USERS_DATA = "SINGLE_USERS_DATA";
 export const SINGLE_USERS_SET = "SINGLE_USERS_SET";
+export const POST_CART_DATA = "POST_CART_DATA";
+export const GET_CART_DATA = "GET_CART_DATA";
+export const GET_USERS_DATA = "GET_USERS_DATA";

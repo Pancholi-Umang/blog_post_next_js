@@ -4,19 +4,25 @@
       "id": 1,
       "title": "John’s Restaurant",
       "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat …",
-      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-004-1.jpg"
+      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-004-1.jpg",
+      "price": 10,
+      "quantity": 1
     },
     {
       "id": 2,
       "title": "Bottega Zenallo",
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
-      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-005-1.jpg"
+      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-005-1.jpg",
+      "price": 15,
+      "quantity": 1
     },
     {
       "id": 3,
       "title": "Julliano’s Place",
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit.",
-      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-006-1.jpg"
+      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-006-1.jpg",
+      "price": 12,
+      "quantity": 1
     }
   ],
   "food": [
@@ -24,19 +30,25 @@
       "id": 1,
       "title": "Spaghetti Sauce With Ground Beef",
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
-      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-02.jpg"
+      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-02.jpg",
+      "price": 10,
+      "quantity": 1
     },
     {
       "id": 2,
       "title": "Garlic-Butter Steak",
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
-      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-03.jpg"
+      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-03.jpg",
+      "price": 11,
+      "quantity": 1
     },
     {
       "id": 3,
       "title": "Honey Lime Rainbow Fruit Salad",
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
-      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-01.jpg"
+      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-01.jpg",
+      "price": 14,
+      "quantity": 1
     }
   ],
   "drink": [
@@ -44,19 +56,25 @@
       "id": 1,
       "title": "10 Festive Pride Cocktails To Party With",
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
-      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-07.jpg"
+      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-07.jpg",
+      "price": 15,
+      "quantity": 1
     },
     {
       "id": 2,
       "title": "20 Easy Vodka Drinks With 4 Ingredients Or Less",
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
-      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-08.jpg"
+      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-08.jpg",
+      "price": 10,
+      "quantity": 1
     },
     {
       "id": 3,
       "title": "25 Sophisticated Drinks To Get You Feeling Fancy",
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
-      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-09.jpg"
+      "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-09.jpg",
+      "price": 13,
+      "quantity": 1
     }
   ],
   "users": [
@@ -64,8 +82,87 @@
       "name": "umang",
       "email": "umang@gmail.com",
       "password": "12121212",
-      "addcart": [],
       "id": 1
+    },
+    {
+      "name": "jjjj",
+      "email": "j@1.cv",
+      "password": "12121212",
+      "id": 2
+    },
+    {
+      "name": "jayesh",
+      "email": "jay@gmail.com",
+      "password": "12121212",
+      "id": 3
+    },
+    {
+      "name": "umang ",
+      "email": "u@gmail.com",
+      "password": "12121212",
+      "id": 4
+    }
+  ],
+  "cart": [
+    {
+      "item_id": 1,
+      "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-07.jpg",
+      "item_price": 15,
+      "item_title": "10 Festive Pride Cocktails To Party With",
+      "item_text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "user_id": 1,
+      "id": 1,
+      "item_quantity": 1
+    },
+    {
+      "item_id": 2,
+      "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-08.jpg",
+      "item_price": 10,
+      "item_title": "20 Easy Vodka Drinks With 4 Ingredients Or Less",
+      "item_text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "user_id": 2,
+      "id": 3,
+      "item_quantity": 1
+    },
+    {
+      "item_id": 1,
+      "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-07.jpg",
+      "item_price": 15,
+      "item_title": "10 Festive Pride Cocktails To Party With",
+      "item_text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "user_id": 2,
+      "id": 4,
+      "item_quantity": 1
+    },
+    {
+      "item_id": 1,
+      "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-004-1.jpg",
+      "item_price": 10,
+      "item_title": "John’s Restaurant",
+      "item_text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat …",
+      "item_quantity": 2,
+      "user_id": 3,
+      "id": 5
+    },
+    {
+      "item_id": 1,
+      "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-02.jpg",
+      "item_price": 10,
+      "item_title": "Spaghetti Sauce With Ground Beef",
+      "item_text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "item_quantity": 15,
+      "user_id": 3,
+      "id": 6
+    },
+    {
+      "item_id": 1,
+      "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-07.jpg",
+      "item_price": 15,
+      "item_title": "10 Festive Pride Cocktails To Party With",
+      "item_text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "item_quantity": 4,
+      "user_id": 4,
+      "id": 7
     }
   ]
 }

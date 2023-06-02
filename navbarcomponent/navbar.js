@@ -11,7 +11,6 @@ function Navbr() {
   const User = useSelector((state) => state?.item?.user);
   const [goCart, setGoCart] = useState(false);
   const [Redirected, setRedirected] = useState(false);
-  let redirect = true;
 
   useEffect(() => {
     if (User?.name !== undefined) {
@@ -24,9 +23,11 @@ function Navbr() {
   }, [User]);
 
   const log_out_function = () => {
-    localStorage.removeItem('loginBlog');
+    localStorage.removeItem("loginBlog");
     location.reload();
-  }
+  };
+
+  const UserCart = useSelector((state) => state?.item?.usercart);
 
   return (
     <Navbar className={styles.navbarBackground} expand="lg">
@@ -45,15 +46,33 @@ function Navbr() {
             <Link href="/components/home" className="nav-link">
               HOME
             </Link>
-            <Link href="/components/food" className="nav-link">
-              FOOD
-            </Link>
-            <Link href="/components/drink" className="nav-link">
-              DRINK
-            </Link>
-            <Link href="/components/restorent" className="nav-link">
-              BEST RESTORENT
-            </Link>
+            {goCart !== true ? (
+              <Link href="/components/food" className="nav-link pe-none">
+                FOOD
+              </Link>
+            ) : (
+              <Link href="/components/food" className="nav-link">
+                FOOD
+              </Link>
+            )}
+            {goCart !== true ? (
+              <Link href="/components/drink" className="nav-link pe-none">
+                DRINK
+              </Link>
+            ) : (
+              <Link href="/components/drink" className="nav-link">
+                DRINK
+              </Link>
+            )}
+            {goCart !== true ? (
+              <Link href="/components/restorent" className="nav-link pe-none">
+                BEST RESTORENT
+              </Link>
+            ) : (
+              <Link href="/components/restorent" className="nav-link">
+                BEST RESTORENT
+              </Link>
+            )}
             <Link href="/components/about" className="nav-link">
               ABOUT
             </Link>
@@ -64,19 +83,23 @@ function Navbr() {
               <Link href="/components/loginuser" className="nav-link">
                 LOGIN
               </Link>
-            ) : <span className="nav-link myPointer"  onClick={log_out_function}>LOGOUT</span>}
-            
+            ) : (
+              <span className="nav-link myPointer" onClick={log_out_function}>
+                LOGOUT
+              </span>
+            )}
+
             {/* here used pe-none class that is do not redirect to the link */}
-            {
-              goCart !== true ? 
-                <Link href="/components/cart" className="nav-link pe-none">  
-                  <BsFillCartPlusFill size={30} />
-                </Link> 
-              : 
-              <Link href="/components/cart" className="nav-link">
+            {goCart !== true ? (
+              <Link href="/components/cart" className="nav-link pe-none">
                 <BsFillCartPlusFill size={30} />
               </Link>
-            }
+            ) : (
+              <Link href="/components/cart" className="nav-link position-relative">
+                <BsFillCartPlusFill size={30} />
+                <p className="position-absolute top-0 end-0 pe-1">{UserCart?.length}</p>
+              </Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

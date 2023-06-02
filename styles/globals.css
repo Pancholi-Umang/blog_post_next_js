@@ -118,3 +118,9 @@ body{
 .myPointer{
   cursor: pointer;
 }
+
+.borderHeight{
+  height: 20px;
+  width: 20px;
+ color: red;
+}

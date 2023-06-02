@@ -1,13 +1,6 @@
 import * as types from "../actionTypes";
 
-const initialState = {
-  drink: [],
-  food: [],
-  resto: [],
-  users:[],
-  user:{},
-  loading:true,
-};
+const initialState = { drink: [], food: [], resto: [], users:[], user:{}, usercart:[], loading:true };
 
 const productReducer = (state = initialState, action) => {
   if (action.type === types.FETCH_ALL_FOOD) {
@@ -28,10 +21,16 @@ const productReducer = (state = initialState, action) => {
       resto: action.payload,
       loading:false
     }
-  }else if (action.type === types.POST_USERS_DATA) {
+  }else if (action.type === types.GET_USERS_DATA) {
     return {
       ...state,
       users: action.payload,
+      loading:false
+    }
+  }else if (action.type === types.POST_USERS_DATA) {
+    return {
+      ...state,
+      users: [...state.users, action.payload],
       loading:false
     }
   }else if (action.type === types.SINGLE_USERS_DATA) {
@@ -44,6 +43,12 @@ const productReducer = (state = initialState, action) => {
     return {
       ...state,
       user: action.payload,
+      loading:false
+    }
+  }else if (action.type === types.GET_CART_DATA) {
+    return {
+      ...state,
+      usercart: action.payload,
       loading:false
     }
   }else {

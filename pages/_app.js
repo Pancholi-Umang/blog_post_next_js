@@ -3,7 +3,7 @@ import Navbar from "../navbarcomponent/navbar";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { wrapper, store } from "../store";
 import { Provider, useDispatch, useSelector } from "react-redux";
-import { setSingleUser } from "../action";
+import { getCartdata, setSingleUser } from "../action";
 import { useEffect } from "react";
 import { Audio } from "react-loader-spinner";
 
@@ -25,14 +25,17 @@ function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
   const data = LocalStorageItem();
   const loading = useSelector((state) => state?.item?.loading);
+ 
 
   useEffect(() => {
     if (data) {
       dispatch(setSingleUser(data));
+      dispatch(getCartdata(data?.id));
     } else {
       dispatch(setSingleUser([]));
     }
   }, [data]);
+ 
 
   return (
     <>
