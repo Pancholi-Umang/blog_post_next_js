@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/food.module.css";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllDrink } from "../../../action";
@@ -39,7 +38,7 @@ const Index = ({ data }) => {
         </Col>
       </Row>
       <Row className="d-flex align-items-center justify-content-center flex-column">
-        <Col lg={10} sm={12}>
+        <Col lg={10} sm={12} className="d-flex justify-content-center flex-column align-items-center">
           {fetchDrink?.map((drinkValue) => {
             return (
               <div
@@ -49,12 +48,10 @@ const Index = ({ data }) => {
                 style={{ cursor: "pointer" }}
               >
                 <div key={drinkValue?.id} className="text-d-none">
-                  <Image
+                  <img
                     src={drinkValue?.image}
-                    alt="foodImage"
-                    height={20}
-                    width={20}
-                    layout="responsive"
+                    alt="drinkImage"
+                    className="img-fluid"
                   />
                   <h3 className={`mt-3 ${styles.changeH3Color}`}>
                     {drinkValue?.title}

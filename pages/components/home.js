@@ -24,12 +24,9 @@ const home = () => {
         <Row className={`${styles.belowCardsRow} mb-5`}>
           <Col lg={4} md={6} sm={12}>
             <Card className={`bg-transparent ${styles.WholeCard}`}>
-              <Image
-                variant="top"
-                className={`${styles.card_img_top} px-3`}
+              <img
+                className={`${styles.card_img_top} card-img-top px-3`}
                 src="https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-02.jpg"
-                width={500}
-                height={300}
                 layout="responsive"
               />
               <Card.Body className={`${styles.setText}`}>
@@ -50,12 +47,9 @@ const home = () => {
 
           <Col lg={4} md={6} sm={12}>
             <Card className={`bg-transparent ${styles.WholeCard}`}>
-              <Image
-                variant="top"
-                className={`${styles.card_img_top} px-3`}
+              <img
+                className={`${styles.card_img_top} card-img-top px-3`}
                 src="https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-08.jpg"
-                width={500}
-                height={300}
                 layout="responsive"
               />
               <Card.Body className={`${styles.setText}`}>
@@ -76,12 +70,9 @@ const home = () => {
 
           <Col lg={4} md={6} sm={12}>
             <Card className={`bg-transparent ${styles.WholeCard}`}>
-              <Image
-                variant="top"
-                className={`${styles.card_img_top} px-3`}
+              <img
+                className={`${styles.card_img_top} card-img-top px-3`}
                 src="https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-02.jpg"
-                width={500}
-                height={300}
                 layout="responsive"
               />
               <Card.Body className={`${styles.setText}`}>

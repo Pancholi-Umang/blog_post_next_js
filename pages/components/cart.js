@@ -93,12 +93,12 @@ const cart = () => {
                             </p>
                             <p className="lead fw-normal mb-0 text-center d-flex justify-content-between">
                               <span className="myPointer text-center" onClick={() => Decrement(cartValues?.id, cartValues?.item_quantity - 1)}> - </span>
-                              <p className="text-center">{cartValues?.item_quantity}</p>
+                              <input type="number" style={{width:"40px"}} className="text-center" value={cartValues?.item_quantity} disabled></input>
                               <span className="myPointer text-center" onClick={() => Increment(cartValues?.id, cartValues?.item_quantity + 1)}> + </span>
                             </p>
                           </div>
                         </div>
-                        <div className="col-md-2 d-flex justify-content-center">
+                        <div className="col-md-2 d-flex justify-content-center">  
                           <div>
                             <p className="small text-muted mb-4 pb-2 text-center">
                               Price

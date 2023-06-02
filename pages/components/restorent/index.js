@@ -38,7 +38,7 @@ const Index = ({ data }) => {
         </Col>
       </Row>
       <Row className="d-flex align-items-center justify-content-center flex-column">
-        <Col lg={10} sm={12}>
+        <Col Col lg={10} sm={12} className="d-flex justify-content-center flex-column align-items-center">
           {fetchResto?.map((resto) => {
             return (
               <div
@@ -48,15 +48,12 @@ const Index = ({ data }) => {
                 style={{ cursor: "pointer" }}
               >
                 <div key={resto?.id} className="text-d-none">
-                  <Image
+                  <img
                     src={resto?.image}
-                    alt="foodImage"
-                    height={20}
-                    width={20}
-                    layout="responsive"
+                    alt="restoImage"
+                    className="img-fluid"
                   />
                   <h3 className={`mt-3 ${styles.changeH3Color}`}>
-                    
                     {resto?.title}
                   </h3>
                   <p className={styles.ChangeColorbelowH3}>{resto?.text}</p>

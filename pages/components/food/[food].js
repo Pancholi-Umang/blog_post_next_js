@@ -41,11 +41,15 @@ const FoodDynamic = ({ data }) => {
         <title>Food</title>
       </Head>
       <Row className="d-flex align-items-center justify-content-center flex-column bg-white py-5">
-        <Col lg={10} sm={12}>
+        <Col className="centerClassWithColumn" lg={10} sm={12}>
           <div className="my-2" style={{ cursor: "pointer" }} >
             <div className="text-d-none">
               <h3 className={`mt-3 ${styles.changeH3Color}`}> {data?.title} </h3>
-              <Image className="my-3" src={data?.image} alt="foodImage" height={20} width={20} layout="responsive"/>
+              <img
+                className="my-3 img-fluid"
+                src={data?.image}
+                alt="foodImage"
+              />
               <p className={styles.ChangeColorbelowH3}>{data?.text}</p>
               <p className={styles.ChangeColorbelowH3}>{data?.price}₹</p>
             </div>
