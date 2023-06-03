@@ -14,18 +14,19 @@ const initialValues = {
 };
 
 const Registration = () => {
+  const router = useRouter();
+  const User = useSelector((state) => state?.item?.user);
+
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
     validationSchema: signupSchema,
     onSubmit: (values) => {
       dispatch(postUsersdata(values));
-      formik?.resetForm();
+      router.push("/components/loginuser")
     },
   });
 
-  const router = useRouter();
-  const User = useSelector((state) => state?.item?.user);
 
   useEffect(() => {
     User?.name ? router.push("/") : console.log("not logged in");

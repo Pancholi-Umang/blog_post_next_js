@@ -23,7 +23,7 @@ const cart = () => {
   function Increment(id, qty) {
     setButtonQuantity(qty);
     if (buttonQuantity < 99) {
-      axios.patch(`http://localhost:5000/cart/${id}`, {
+      axios.patch(`http://192.168.29.229:5000/cart/${id}`, {
         item_quantity: qty,
       });
     } else {
@@ -35,7 +35,7 @@ const cart = () => {
   function Decrement(id, qty) {
     setButtonQuantity(qty);
     if (buttonQuantity > 1) {
-      axios.patch(`http://localhost:5000/cart/${id}`, {
+      axios.patch(`http://192.168.29.229:5000/cart/${id}`, {
         item_quantity: qty,
       });
     } else {
@@ -78,19 +78,13 @@ const cart = () => {
                         </div>
                         <div className="col-md-2 d-flex justify-content-center">
                           <div>
-                            <p className="small text-muted mb-4 pb-2 text-center">
-                              Name
-                            </p>
-                            <p className="fw-normal mb-0 text-center">
-                              {cartValues?.item_title}
-                            </p>
+                            <p className="small text-muted mb-4 pb-2 text-center"> Name </p>
+                            <p className="fw-normal mb-0 text-center"> {cartValues?.item_title} </p>
                           </div>
                         </div>
                         <div className="col-md-2 d-flex justify-content-center">
                           <div>
-                            <p className="small text-muted mb-4 pb-2">
-                              Quantity
-                            </p>
+                            <p className="small text-muted mb-4 pb-2"> Quantity </p>
                             <p className="lead fw-normal mb-0 text-center d-flex justify-content-between">
                               <span className="myPointer text-center" onClick={() => Decrement(cartValues?.id, cartValues?.item_quantity - 1)}> - </span>
                               <input type="number" style={{width:"40px"}} className="text-center" value={cartValues?.item_quantity} disabled></input>

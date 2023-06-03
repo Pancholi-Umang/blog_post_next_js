@@ -4,7 +4,6 @@ import styles from "../../styles/Home.module.css";
 import Subscribeform from "../components/subscribeform";
 import { Col, Row } from "react-bootstrap";
 import { Card } from "react-bootstrap";
-import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 

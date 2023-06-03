@@ -7,6 +7,7 @@ import { getCartdata, setSingleUser } from "../action";
 import { useEffect, useState } from "react";
 import LoadingOverlay from "react-loading-overlay-ts";
 import { useRouter } from "next/router";
+// json-server --watch db.json --port 5000 --host 192.168.29.229
 
 const LocalStorageItem = () => {
   if (typeof window !== "undefined") {
@@ -22,10 +23,10 @@ const LocalStorageItem = () => {
   }
 };
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, ...rest }) {
+  const {store, props} = wrapper.useWrappedStore(rest);
   const dispatch = useDispatch();
   const data = LocalStorageItem();
-  //  const { store } = wrapper.useWrappedStore();
   const router = useRouter();
   const [isActive, setActive] = useState(false);
 
@@ -70,9 +71,9 @@ function MyApp({ Component, pageProps }) {
         }}
       ></LoadingOverlay>
       <Navbar />
-      <Component {...pageProps} />
+      <Component {...props.pageProps} />
     </Provider>
   );
 }
 
-export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(App);

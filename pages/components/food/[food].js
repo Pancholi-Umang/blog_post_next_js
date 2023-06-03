@@ -11,7 +11,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     try {
       const { food } = context.query;
-      let { data } = await axios.get(`http://localhost:5000/food/${food}`);
+      let { data } = await axios.get(`http://192.168.29.229:5000/food/${food}`);
       return { props: { data } };
     } catch (error) {
       return console.log(error);

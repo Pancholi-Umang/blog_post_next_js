@@ -10,9 +10,9 @@ import { useRouter } from "next/router";
 
 function Navbr() {
   const User = useSelector((state) => state?.item?.user);
+  const router = useRouter();
   const [goCart, setGoCart] = useState(false);
   const [Redirected, setRedirected] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     if (User?.name !== undefined) {
@@ -26,10 +26,8 @@ function Navbr() {
 
   const log_out_function = () => {
     localStorage.removeItem("loginBlog");
-    router.push("/")
+    router.push("/");
   };
-
-
 
   const UserCart = useSelector((state) => state?.item?.usercart);
 
@@ -50,33 +48,19 @@ function Navbr() {
             <Link href="/components/home" className="nav-link">
               HOME
             </Link>
-            {goCart !== true ? (
-              <Link href="/components/food" className="nav-link pe-none">
-                FOOD
-              </Link>
-            ) : (
-              <Link href="/components/food" className="nav-link">
-                FOOD
-              </Link>
-            )}
-            {goCart !== true ? (
-              <Link href="/components/drink" className="nav-link pe-none">
-                DRINK
-              </Link>
-            ) : (
-              <Link href="/components/drink" className="nav-link">
-                DRINK
-              </Link>
-            )}
-            {goCart !== true ? (
-              <Link href="/components/restorent" className="nav-link pe-none">
-                BEST RESTORENT
-              </Link>
-            ) : (
-              <Link href="/components/restorent" className="nav-link">
-                BEST RESTORENT
-              </Link>
-            )}
+
+            <Link href="/components/food" className="nav-link">
+              FOOD
+            </Link>
+
+            <Link href="/components/drink" className="nav-link">
+              DRINK
+            </Link>
+
+            <Link href="/components/restorent" className="nav-link">
+              BEST RESTORENT
+            </Link>
+
             <Link href="/components/about" className="nav-link">
               ABOUT
             </Link>
@@ -93,15 +77,19 @@ function Navbr() {
               </span>
             )}
 
-            {/* here used pe-none class that is do not redirect to the link */}
             {goCart !== true ? (
               <Link href="/components/cart" className="nav-link pe-none">
                 <BsFillCartPlusFill size={30} />
               </Link>
             ) : (
-              <Link href="/components/cart" className="nav-link position-relative">
+              <Link
+                href="/components/cart"
+                className="nav-link position-relative"
+              >
                 <BsFillCartPlusFill size={30} />
-                <p className="top-0 end-0 pe-1 giveRegBg"><span className="text-white">{UserCart?.length}</span></p>
+                <p className="top-0 end-0 pe-1 giveRegBg">
+                  <span className="text-white">{UserCart?.length}</span>
+                </p>
               </Link>
             )}
           </Nav>

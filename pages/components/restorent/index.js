@@ -10,7 +10,7 @@ import axios from "axios";
 
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   try {
-    let { data } = await axios.get("http://localhost:5000/restorent");
+    let { data } = await axios.get("http://192.168.29.229:5000/restorent");
     let productdata = await store.dispatch({
       type: types?.FETCH_ALL_RESTORENT,
       payload: data,
@@ -43,7 +43,7 @@ const Index = () => {
             return (
               <div key={resto?.id} onClick={() => router.push(`restorent/${resto?.id}`)} className="my-2" style={{ cursor: "pointer" }}>
                 <div key={resto?.id} className="text-d-none">
-                  <img src={resto?.image} alt="restoImage" className="img-fluid" />
+                  <img src={resto?.image} alt="restoImage" className="img-fluid w-100" />
                   <h3 className={`mt-3 ${styles.changeH3Color}`}>
                     {resto?.title}
                   </h3>

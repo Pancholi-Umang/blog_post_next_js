@@ -12,7 +12,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     try {
       const { restorent } = context.query;
       let { data } = await axios.get(
-        `http://localhost:5000/restorent/${restorent}`
+        `http://192.168.29.229:5000/restorent/${restorent}`
       );
       return { props: { data } };
     } catch (error) {

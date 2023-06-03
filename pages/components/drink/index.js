@@ -10,7 +10,7 @@ import * as types from "../../../actionTypes";
 
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   try {
-    let { data } = await axios.get("http://localhost:5000/drink");
+    let { data } = await axios.get("http://192.168.29.229:5000/drink");
     let productdata = await store.dispatch({
       type: types?.FETCH_ALL_DRINK,
       payload: data,
@@ -55,7 +55,7 @@ const Index = () => {
                   <img
                     src={drinkValue?.image}
                     alt="drinkImage"
-                    className="img-fluid"
+                    className="img-fluid w-100"
                   />
                   <h3 className={`mt-3 ${styles.changeH3Color}`}>
                     {drinkValue?.title}

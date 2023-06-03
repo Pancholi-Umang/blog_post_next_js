@@ -11,7 +11,7 @@ import axios from "axios";
 
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   try {
-    let { data } = await axios.get("http://localhost:5000/food");
+    let { data } = await axios.get("http://192.168.29.229:5000/food");
     let productdata = await store.dispatch({
       type: types?.FETCH_ALL_FOOD,
       payload: data,
@@ -53,7 +53,7 @@ const Index = () => {
                   <img
                     src={foodValue?.image}
                     alt="foodImage"
-                    className="img-fluid"
+                    className="img-fluid w-100"
                   />
                   <h3 className={`mt-3 ${styles.changeH3Color}`}>
                     {foodValue?.title}
