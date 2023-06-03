@@ -1,33 +1,33 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/food.module.css";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllDrink } from "../../../action";
+import { useSelector } from "react-redux";
 import Head from "next/head";
+import axios from "axios";
+import { wrapper } from "../../../store";
+import * as types from "../../../actionTypes";
 
-export const getStaticProps = async () => {
-  const data = await fetch("http://localhost:5000/drink").then((res) =>
-    res.json()
-  );
-  return {
-    props: {
-      data,
-    },
-  };
-};
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  try {
+    let { data } = await axios.get("http://localhost:5000/drink");
+    let productdata = await store.dispatch({
+      type: types?.FETCH_ALL_DRINK,
+      payload: data,
+    });
+    return { props: { productdata } };
+  } catch (error) {
+    return console.log(error,"error in indexjs of drink");
+  }
+});
 
-const Index = ({ data }) => {
-  const fetchDrink = useSelector(state=>state.item.drink)
-  const dispatch = useDispatch();
+const Index = () => {
+  const fetchDrink = useSelector((state) => state?.item?.drink);
   const router = useRouter();
-  useEffect(() => {
-    dispatch(getAllDrink(data));
-  }, []);
 
   return (
     <Container className="ps-5 pe-5">
-       <Head>
+      <Head>
         <title>Drink</title>
       </Head>
       <Row
@@ -38,7 +38,11 @@ const Index = ({ data }) => {
         </Col>
       </Row>
       <Row className="d-flex align-items-center justify-content-center flex-column">
-        <Col lg={10} sm={12} className="d-flex justify-content-center flex-column align-items-center">
+        <Col
+          lg={10}
+          sm={12}
+          className="d-flex justify-content-center flex-column align-items-center"
+        >
           {fetchDrink?.map((drinkValue) => {
             return (
               <div
@@ -56,7 +60,9 @@ const Index = ({ data }) => {
                   <h3 className={`mt-3 ${styles.changeH3Color}`}>
                     {drinkValue?.title}
                   </h3>
-                  <p className={styles.ChangeColorbelowH3}>{drinkValue?.text}</p>
+                  <p className={styles.ChangeColorbelowH3}>
+                    {drinkValue?.text}
+                  </p>
                 </div>
                 <hr className="mb-4" />
               </div>

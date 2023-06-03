@@ -1,5 +1,5 @@
-import * as types from "../actionTypes";
 import { HYDRATE } from "next-redux-wrapper";
+import * as types from "../actionTypes";
 
 const initialState = { drink: [], food: [], resto: [], users:[], user:{}, usercart:[], loading:true };
 
@@ -25,7 +25,7 @@ const productReducer = (state = initialState, action) => {
   }else if (action.type === types.GET_USERS_DATA) {
     return {
       ...state,
-      users: action.payload,
+      users: action.payload,  
       loading:false
     }
   }else if (action.type === types.POST_USERS_DATA) {
@@ -53,7 +53,10 @@ const productReducer = (state = initialState, action) => {
       loading:false
     }
   }else if (action.type === HYDRATE) {
-    console.log("hydrarde",action.payload)
+    return {
+      ...state,
+      ...action.payload?.item,
+    }
   }else {
     return state;
   }

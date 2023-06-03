@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import Navbar from "../navbarcomponent/navbar";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { wrapper, store } from "../store";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { getCartdata, setSingleUser } from "../action";
 import { useEffect, useState } from "react";
 import LoadingOverlay from "react-loading-overlay-ts";
@@ -25,7 +25,7 @@ const LocalStorageItem = () => {
 function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
   const data = LocalStorageItem();
-
+  //  const { store } = wrapper.useWrappedStore();
   const router = useRouter();
   const [isActive, setActive] = useState(false);
 

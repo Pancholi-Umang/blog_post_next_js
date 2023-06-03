@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/food.module.css";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import { getAllRestorent } from "../../../action";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Head from "next/head";
+import { wrapper } from "../../../store";
+import * as types from "../../../actionTypes";
+import axios from "axios";
 
-export const getStaticProps = async () => {
-  const data = await fetch("http://localhost:5000/restorent").then((res) =>
-    res.json()
-  );
-  return {
-    props: {
-      data,
-    },
-  };
-};
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  try {
+    let { data } = await axios.get("http://localhost:5000/restorent");
+    let productdata = await store.dispatch({
+      type: types?.FETCH_ALL_RESTORENT,
+      payload: data,
+    });
+    return { props: { productdata } };
+  } catch (error) {
+    return console.log(error, "error in indexjs of restorent");
+  }
+});
 
-const Index = ({ data }) => {
-  const fetchResto = useSelector(state=>state?.item?.resto)
+const Index = () => {
+  const fetchResto = useSelector((state) => state?.item?.resto);
   const router = useRouter();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllRestorent(data));
-  }, []);
+
   return (
     <Container className="ps-5 pe-5">
       <Head>
@@ -38,21 +38,12 @@ const Index = ({ data }) => {
         </Col>
       </Row>
       <Row className="d-flex align-items-center justify-content-center flex-column">
-        <Col Col lg={10} sm={12} className="d-flex justify-content-center flex-column align-items-center">
+        <Col lg={10} sm={12} className="d-flex justify-content-center flex-column align-items-center">
           {fetchResto?.map((resto) => {
             return (
-              <div
-                key={resto?.id}
-                onClick={() => router.push(`restorent/${resto?.id}`)}
-                className="my-2"
-                style={{ cursor: "pointer" }}
-              >
+              <div key={resto?.id} onClick={() => router.push(`restorent/${resto?.id}`)} className="my-2" style={{ cursor: "pointer" }}>
                 <div key={resto?.id} className="text-d-none">
-                  <img
-                    src={resto?.image}
-                    alt="restoImage"
-                    className="img-fluid"
-                  />
+                  <img src={resto?.image} alt="restoImage" className="img-fluid" />
                   <h3 className={`mt-3 ${styles.changeH3Color}`}>
                     {resto?.title}
                   </h3>

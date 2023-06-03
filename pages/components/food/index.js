@@ -1,30 +1,30 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/food.module.css";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllFood } from "../../../action";
+import { useSelector } from "react-redux";
 import Head from "next/head";
+import { wrapper } from "../../../store";
+import * as types from "../../../actionTypes";
+import axios from "axios";
 
 
-export const getStaticProps = async () => {
-  const data = await fetch("http://localhost:5000/food").then((res) =>
-    res.json()
-  );
-  return {
-    props: {
-      data,
-    },
-  };
-};
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  try {
+    let { data } = await axios.get("http://localhost:5000/food");
+    let productdata = await store.dispatch({
+      type: types?.FETCH_ALL_FOOD,
+      payload: data,
+    })
+    return { props: { productdata } };
+  } catch (error) {
+    return console.log(error,"error in indexjs of food");
+  }
+});
 
-const Index = ({ data }) => {
+const Index = () => {
   const fetchFood = useSelector(state=>state?.item?.food)
   const router = useRouter();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllFood(data));
-  }, []);
 
   return (
     <Container className="ps-5 pe-5">

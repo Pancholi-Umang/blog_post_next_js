@@ -1,22 +1,23 @@
-import Image from "next/image";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/food.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { postCartdata } from "../../../action";
 import Head from "next/head";
+import axios from "axios";
+import { wrapper } from "../../../store";
 
-export const getServerSideProps = async (req) => {
-  const { food } = req.query;
-  const response = await fetch(`http://localhost:5000/food/${food}`);
-  const data = await response.json();
-
-  return {
-    props: {
-      data,
-    },
-  };
-};
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+    try {
+      const { food } = context.query;
+      let { data } = await axios.get(`http://localhost:5000/food/${food}`);
+      return { props: { data } };
+    } catch (error) {
+      return console.log(error);
+    }
+  }
+);
 
 const FoodDynamic = ({ data }) => {
   

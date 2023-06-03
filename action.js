@@ -1,31 +1,6 @@
 import axios from "axios";
 import * as types from "./actionTypes";
 
-export const getAllFood = (data) => {
-  return function (dispatch) {
-    dispatch({
-      type: types?.FETCH_ALL_FOOD,
-      payload: data,
-    });
-  };
-};
-export const getAllDrink = (data) => {
-  return function (dispatch) {
-    dispatch({
-      type: types?.FETCH_ALL_DRINK,
-      payload: data,
-    });
-  };
-};
-export const getAllRestorent = (data) => {
-  return function (dispatch) {
-    dispatch({
-      type: types?.FETCH_ALL_RESTORENT,
-      payload: data,
-    });
-  };
-};
-
 export const postUsersdata = (data) => {
   return function (dispatch) {
     axios?.post(`http://localhost:5000/users`, data).then((res) => {
