@@ -1,29 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getCartdata, removeCartItem } from "../../action";
+import { getCartdata } from "../../../action";
 import axios from "axios";
 import Link from "next/link";
 import Head from "next/head";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 
 const cart = () => {
-  const UserCart = useSelector((state) => state?.item?.usercart);
   const [buttonQuantity, setButtonQuantity] = useState(1);
   const User = useSelector((state) => state?.item?.login);
+  const [UserCart, setUserCart] = useState([])
+  const router = useRouter();
+  const { token } = router.query;
+  console.log(token)
+
+  const getData = () => {
+    axios?.get(`http://192.168.29.229:5000/cart/?user_id=${token}`).then((res) => {
+    setUserCart(res?.data)
+  })}
+
+  useEffect(() => {
+    getData();
+  }, [token]);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCartdata(User));
-  }, []);
 
   const removeItemOnCart = (id) => {
-    dispatch(removeCartItem(id, User));
-    toast('Product Removed');
+    axios?.delete(`http://192.168.29.229:5000/cart/${id}`)
+    .then((res) => {
+      dispatch(getCartdata(User));
+      getData();
+      toast("Product Removed");
+    });
   };
-
-
+  
   function Increment(id, qty) {
     setButtonQuantity((prevQty) => {
       const newQty = qty + 1;
@@ -33,12 +46,13 @@ const cart = () => {
         });
         return newQty;
       } else {
-        return prevQty; 
+        return prevQty;
       }
     });
     dispatch(getCartdata(User));
+    getData();
   }
-
+  
   function Decrement(id, qty) {
     setButtonQuantity((prevQty) => {
       const newQty = qty - 1;
@@ -48,10 +62,11 @@ const cart = () => {
         });
         return newQty;
       } else {
-        return prevQty; 
+        return prevQty;
       }
     });
     dispatch(getCartdata(User));
+    getData();
   }
 
   let cartTotal = 0;
@@ -87,9 +102,12 @@ const cart = () => {
                         </div>
                         <div className="col-md-2 d-flex justify-content-center">
                           <div>
-                            <p className="small text-muted mb-4 pb-2 text-center"> Name </p>
+                            <p className="small text-muted mb-4 pb-2 text-center">
+                              
+                              Name
+                            </p>
                             <p className="fw-normal mb-0 text-center">
-                             {cartValues?.item_title}
+                              {cartValues?.item_title}
                             </p>
                           </div>
                         </div>
@@ -99,10 +117,20 @@ const cart = () => {
                               Quantity
                             </p>
                             <p className="lead fw-normal mb-0 text-center d-flex justify-content-between">
-                              <span
+                              {
+                                User === token ?  <span
                                 className="myPointer text-center user-select-none"
-                                onClick={() => Decrement( cartValues?.id, cartValues?.item_quantity )}
-                              >-</span>
+                                onClick={() =>
+                                  Decrement(
+                                    cartValues?.id,
+                                    cartValues?.item_quantity
+                                  )
+                                }
+                              >
+                                -
+                              </span> : <span className="myPointer text-center user-select-none"> - </span>
+                              }
+                             
                               <input
                                 type="number"
                                 style={{ width: "40px" }}
@@ -110,15 +138,20 @@ const cart = () => {
                                 value={cartValues?.item_quantity}
                                 disabled
                               ></input>
-                              <span
-                                className="myPointer text-center user-select-none"
-                                onClick={() =>
-                                  Increment(
-                                    cartValues?.id,
-                                    cartValues?.item_quantity
-                                  )
-                                }
-                              >+</span>
+                              {
+                                 User === token ? <span
+                                 className="myPointer text-center user-select-none"
+                                 onClick={() =>
+                                   Increment(
+                                     cartValues?.id,
+                                     cartValues?.item_quantity
+                                   )
+                                 }
+                               >
+                                 +
+                               </span> : <span className="myPointer text-center user-select-none"> + </span>
+                              }
+                              
                             </p>
                           </div>
                         </div>
@@ -147,12 +180,15 @@ const cart = () => {
                         <div className="col-md-2 d-flex justify-content-center">
                           <div className="text-center">
                             <p className="small text-muted mb-4 pb-2">Remove</p>
-                            <button
+                            {
+                              User === token ? <button
                               className=" btn btn-outline-danger text-end"
                               onClick={() => removeItemOnCart(cartValues?.id)}
                             >
                               REMOVE
-                            </button>
+                            </button> : <button className=" btn btn-outline-danger text-end"> REMOVE </button>
+                            }
+                            
                           </div>
                         </div>
                       </div>

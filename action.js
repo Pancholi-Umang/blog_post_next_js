@@ -44,15 +44,6 @@ export const postCartdata = (data) => {
   };
 };
 
-export const removeCartItem = (id,user_id) => {
-  return function (dispatch) {
-    axios?.delete(`http://192.168.29.229:5000/cart/${id}`)
-    .then((res) => {
-      dispatch(getCartdata(user_id));
-    });
-  };
-};
-
 export const getSingleUsers = (data) => {
   return function (dispatch) {
     axios?.get(

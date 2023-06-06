@@ -5,20 +5,9 @@ import Navbar from "react-bootstrap/Navbar";
 import styles from "./navbar.module.css";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 
 function Navbr() {
-  const User = useSelector((state) => state?.item?.user);
-  const [Redirected, setRedirected] = useState(false);
-
-  useEffect(() => {
-    if (User?.name !== undefined) {
-      setRedirected(false);
-    } else {
-      setRedirected(true);
-    }
-  }, [User]);
-
+  const User = useSelector((state) => state?.item?.login);
   const UserCart = useSelector((state) => state?.item?.usercart);
 
   return (
@@ -58,7 +47,7 @@ function Navbr() {
               WORK WITH ME
             </Link>
 
-            <Link href="/components/cart" className="nav-link position-relative" >
+            <Link href={`/components/cart/${User}`} className="nav-link position-relative" >
               <BsFillCartPlusFill size={30} />
               <p className="top-0 end-0 pe-1 giveRegBg">
                 <span className="text-white">{UserCart?.length}</span>

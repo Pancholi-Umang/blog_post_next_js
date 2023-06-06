@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import Navbar from "../navbarcomponent/navbar";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { wrapper, store } from "../store";
+import { wrapper } from "../store";
 import { Provider, useDispatch } from "react-redux";
 import { getCartdata, setUser } from "../action";
 import { useEffect, useState } from "react";
