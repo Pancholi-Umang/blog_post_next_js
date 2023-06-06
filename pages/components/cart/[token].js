@@ -9,13 +9,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 
+// this is a cart page
+
 const cart = () => {
   const [buttonQuantity, setButtonQuantity] = useState(1);
   const User = useSelector((state) => state?.item?.login);
   const [UserCart, setUserCart] = useState([])
   const router = useRouter();
   const { token } = router.query;
-  console.log(token)
 
   const getData = () => {
     axios?.get(`http://192.168.29.229:5000/cart/?user_id=${token}`).then((res) => {
@@ -25,9 +26,9 @@ const cart = () => {
   useEffect(() => {
     getData();
   }, [token]);
-
+  
   const dispatch = useDispatch();
-
+  
   const removeItemOnCart = (id) => {
     axios?.delete(`http://192.168.29.229:5000/cart/${id}`)
     .then((res) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/food.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,8 @@ import axios from "axios";
 import { wrapper } from "../../../store";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getcartDataUsingCheck } from '../../../action'
+import Link from "next/link";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
@@ -21,23 +23,39 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-const FoodDynamic = ({ data }) => {
-  
-  const user_Token_Disp = useSelector(state=>state?.item?.login)
-  const dispatch = useDispatch();
 
+const FoodDynamic = ({ data }) => {
+  const checkcondition = useSelector((state) => state?.item?.check);
+  const checkcart = useSelector((state) => state?.item?.usercart);
+  const user_Token_Disp = useSelector(state => state?.item?.login)
+  const dispatch = useDispatch();
   const addIntoCart = () => {
     dispatch(postCartdata({
-        item_id: data?.id,
-        item_image: data?.image,
-        item_price: data?.price,
-        item_title: data?.title,
-        item_text: data?.text,
-        item_quantity: data?.quantity,
-        user_id: user_Token_Disp
-      }))
-      toast.success('Product Add Successfully');
+      item_id: data?.id,
+      item_image: data?.image,
+      item_price: data?.price,
+      item_title: data?.title,
+      item_text: data?.text,
+      item_quantity: data?.quantity,
+      user_id: user_Token_Disp
+    }))
+    toast.success('Product Add Successfully');
   }
+
+  const [state, setState] = useState(false)
+  useEffect(() => {
+    dispatch(getcartDataUsingCheck(user_Token_Disp, data?.id, data?.price))
+  }, [user_Token_Disp, checkcart.length])
+
+  useEffect(() => {
+    checkcondition?.map((val) => {
+      if (val?.item_id == data?.id) {
+        setState(true)
+      } else {
+        setState(false)
+      }
+    })
+  }, [checkcondition])
 
   return (
     <Container className="p-5 my-3">
@@ -57,7 +75,10 @@ const FoodDynamic = ({ data }) => {
               <p className={styles.ChangeColorbelowH3}>{data?.text}</p>
               <p className={styles.ChangeColorbelowH3}>{data?.price}₹</p>
             </div>
-            <button onClick={addIntoCart} className={styles.buttonaddcart}>ADD CART</button>
+            {
+              state === true ? <Link style={{ textDecoration: "none" }} href={`http://192.168.29.229:3000/components/cart/${user_Token_Disp}`} className={styles.buttonaddcart}>VIEW CART</Link> : <button onClick={addIntoCart} className={styles.buttonaddcart}>ADD CART</button>
+            }
+
           </div>
         </Col>
       </Row>

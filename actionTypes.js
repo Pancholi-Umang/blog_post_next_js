@@ -9,3 +9,4 @@ export const GET_CART_DATA = "GET_CART_DATA";
 export const GET_USERS_DATA = "GET_USERS_DATA";
 export const USERS_SET = "USERS_SET";
 export const REMOVE_CART_DATA = "REMOVE_CART_DATA";
+export const CHECK_CART = "CHECK_CART";

@@ -8,7 +8,8 @@ import axios from "axios";
 import { wrapper } from "../../../store";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { getcartDataUsingCheck } from "../../../action";
+import Link from "next/link";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
@@ -26,6 +27,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
 const DrinkDynamic = ({ data }) => {
   const user_Token_Disp = useSelector((state) => state?.item?.login);
+  const checkcondition = useSelector((state) => state?.item?.check);
+  const checkcart = useSelector((state) => state?.item?.usercart);
   const dispatch = useDispatch();
 
   const addIntoCart = () => {
@@ -43,7 +46,21 @@ const DrinkDynamic = ({ data }) => {
     toast.success('Product Add Successfully');
   };
 
-  console.log(toast)
+  const [state, setState] = useState(false);
+  useEffect(() => {
+    dispatch(getcartDataUsingCheck(user_Token_Disp, data?.id, data?.price));
+  }, [user_Token_Disp, checkcart.length]);
+
+  useEffect(() => {
+    checkcondition?.map((val) => {
+      if (val?.item_id == data?.id) {
+        setState(true);
+      } else {
+        setState(false);
+      }
+    });
+  }, [checkcondition]);
+
 
   return (
     <Container className="p-5 my-5">
@@ -57,7 +74,19 @@ const DrinkDynamic = ({ data }) => {
               <p className={styles.ChangeColorbelowH3}>{data?.text}</p>
               <p className={styles.ChangeColorbelowH3}>{data?.price}₹</p>
             </div>
-            <button className={styles.buttonaddcart} onClick={addIntoCart}> ADD CART </button>
+            {state === true ? (
+              <Link
+                style={{ textDecoration: "none" }}
+                href={`http://192.168.29.229:3000/components/cart/${user_Token_Disp}`}
+                className={styles.buttonaddcart}
+              >
+                  VIEW CART
+              </Link>
+            ) : (
+              <button onClick={addIntoCart} className={styles.buttonaddcart}>
+                ADD CART
+              </button>
+            )}
           </div>
         </Col>
       </Row>

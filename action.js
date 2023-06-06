@@ -44,6 +44,19 @@ export const postCartdata = (data) => {
   };
 };
 
+export const getcartDataUsingCheck = (user_Token_Disp,item,price) => {
+  return function (dispatch) {
+    axios?.get(`http://192.168.29.229:5000/cart/?user_id=${user_Token_Disp}&item_id=${item}&item_price=${price}`)
+    .then((res) => {
+      dispatch({
+        type: types?.CHECK_CART,
+        payload: res?.data,
+      });
+      dispatch(getCartdata(user_Token_Disp));
+    });
+  };
+};
+
 export const getSingleUsers = (data) => {
   return function (dispatch) {
     axios?.get(
@@ -69,3 +82,4 @@ export const setUser = (data) => {
     });
   };
 };
+
