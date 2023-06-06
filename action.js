@@ -37,15 +37,17 @@ export const getCartdata = (id) => {
 
 export const postCartdata = (data) => {
   return function (dispatch) {
-    axios?.post(`http://192.168.29.229:5000/cart`, data).then((res) => {
+    axios?.post(`http://192.168.29.229:5000/cart`, data)
+    .then((res) => {
       dispatch(getCartdata(data?.user_id));
-    });
+    })
   };
 };
 
 export const removeCartItem = (id,user_id) => {
   return function (dispatch) {
-    axios?.delete(`http://192.168.29.229:5000/cart/${id}`).then((res) => {
+    axios?.delete(`http://192.168.29.229:5000/cart/${id}`)
+    .then((res) => {
       dispatch(getCartdata(user_id));
     });
   };
@@ -68,10 +70,10 @@ export const getSingleUsers = (data) => {
   };
 };
 
-export const setSingleUser = (data) => {
+export const setUser = (data) => {
   return function (dispatch) {
     dispatch({
-      type: types?.SINGLE_USERS_SET,
+      type: types?.USERS_SET,
       payload: data,
     });
   };
