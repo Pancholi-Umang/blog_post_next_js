@@ -31,7 +31,7 @@
       "title": "Spaghetti Sauce With Ground Beef",
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
       "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-02.jpg",
-      "price": 10,
+      "price": 17,
       "quantity": 1
     },
     {
@@ -39,7 +39,7 @@
       "title": "Garlic-Butter Steak",
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
       "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-03.jpg",
-      "price": 11,
+      "price": 18,
       "quantity": 1
     },
     {
@@ -57,7 +57,7 @@
       "title": "10 Festive Pride Cocktails To Party With",
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
       "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-07.jpg",
-      "price": 15,
+      "price": 19,
       "quantity": 1
     },
     {
@@ -65,7 +65,7 @@
       "title": "20 Easy Vodka Drinks With 4 Ingredients Or Less",
       "text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
       "image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-08.jpg",
-      "price": 10,
+      "price": 11,
       "quantity": 1
     },
     {
@@ -129,24 +129,14 @@
   ],
   "cart": [
     {
-      "item_id": 3,
-      "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-01.jpg",
-      "item_price": 14,
-      "item_title": "Honey Lime Rainbow Fruit Salad",
-      "item_text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
-      "item_quantity": 3,
+      "item_id": 1,
+      "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-004-1.jpg",
+      "item_price": 10,
+      "item_title": "John’s Restaurant",
+      "item_text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat …",
+      "item_quantity": 4,
       "user_id": "zealot",
       "id": 1
-    },
-    {
-      "item_id": 2,
-      "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-03.jpg",
-      "item_price": 11,
-      "item_title": "Garlic-Butter Steak",
-      "item_text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
-      "item_quantity": 1,
-      "user_id": "zealot",
-      "id": 2
     }
   ]
 }

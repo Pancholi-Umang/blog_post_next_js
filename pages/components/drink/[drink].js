@@ -2,22 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/food.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { postCartdata } from "../../../action";
+import { getCartdata, postCartdata } from "../../../action";
 import Head from "next/head";
 import axios from "axios";
 import { wrapper } from "../../../store";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { getcartDataUsingCheck } from "../../../action";
-import Link from "next/link";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     try {
       const { drink } = context.query;
-      let { data } = await axios.get(
-        `http://192.168.29.229:5000/drink/${drink}`
-      );
+      let { data } = await axios.get(`http://192.168.29.229:5000/drink/${drink}`);
       return { props: { data } };
     } catch (error) {
       return console.log(error);
@@ -29,6 +26,7 @@ const DrinkDynamic = ({ data }) => {
   const user_Token_Disp = useSelector((state) => state?.item?.login);
   const checkcondition = useSelector((state) => state?.item?.check);
   const checkcart = useSelector((state) => state?.item?.usercart);
+  const [buttonQuantity, setButtonQuantity] = useState(1);
   const dispatch = useDispatch();
 
   const addIntoCart = () => {
@@ -42,46 +40,73 @@ const DrinkDynamic = ({ data }) => {
         item_quantity: data?.quantity,
         user_id: user_Token_Disp,
       })
-    )
-    toast.success('Product Add Successfully');
+    );
+    toast.success("Product Add Successfully");
   };
 
   const [state, setState] = useState(false);
+  const [q, setQ] = useState(1);
+  const [ids, setIds] = useState(1);
   useEffect(() => {
     dispatch(getcartDataUsingCheck(user_Token_Disp, data?.id, data?.price));
   }, [user_Token_Disp, checkcart.length]);
 
   useEffect(() => {
     checkcondition?.map((val) => {
+      console.log(val);
       if (val?.item_id == data?.id) {
         setState(true);
+        setQ(val?.item_quantity);
+        setIds(val?.id);
       } else {
         setState(false);
       }
     });
   }, [checkcondition]);
 
+  const Increment = (qty) => {
+    toast.success("quantity added")
+    setButtonQuantity((prevQty) => {
+      const newQty = qty + 1;
+      if (newQty <= 99) {
+        axios.patch(`http://192.168.29.229:5000/cart/${ids}`, {
+          item_quantity: newQty,
+        });
+        return newQty;
+      } else {
+        return prevQty;
+      }
+    });
+    dispatch(getCartdata(user_Token_Disp));
+    dispatch(getcartDataUsingCheck(user_Token_Disp, data?.id, data?.price));
+  };
 
   return (
     <Container className="p-5 my-5">
-      <Head> <title>Drink</title> </Head>
+      <Head>
+        <title>Drink</title>
+      </Head>
       <Row className="d-flex align-items-center justify-content-center flex-column bg-white py-5">
         <Col className="centerClassWithColumn" lg={10} sm={12}>
           <div className="my-2 " style={{ cursor: "pointer" }}>
             <div className="text-d-none">
               <h3 className={`mt-3 ${styles.changeH3Color}`}>{data?.title}</h3>
-              <img className="my-3 img-fluid" src={data?.image} alt="drinkImage" />
+              <img
+                className="my-3 img-fluid"
+                src={data?.image}
+                alt="drinkImage"
+              />
               <p className={styles.ChangeColorbelowH3}>{data?.text}</p>
               <p className={styles.ChangeColorbelowH3}>{data?.price}₹</p>
             </div>
             {state === true ? (
-              <Link
+              <button
                 style={{ textDecoration: "none" }}
-                href={`http://192.168.29.229:3000/components/cart/${user_Token_Disp}`}
                 className={styles.buttonaddcart}
+                onClick={() => Increment(q)}
               >
-                  VIEW CART
-              </Link>
+                Increment Quantity
+              </button>
             ) : (
               <button onClick={addIntoCart} className={styles.buttonaddcart}>
                 ADD CART

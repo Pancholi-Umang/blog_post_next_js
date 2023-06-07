@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartdata } from "../../../action";
@@ -14,30 +14,33 @@ import { useRouter } from "next/router";
 const cart = () => {
   const [buttonQuantity, setButtonQuantity] = useState(1);
   const User = useSelector((state) => state?.item?.login);
-  const [UserCart, setUserCart] = useState([])
+  const [UserCart, setUserCart] = useState([]);
   const router = useRouter();
   const { token } = router.query;
 
+
   const getData = () => {
-    axios?.get(`http://192.168.29.229:5000/cart/?user_id=${token}`).then((res) => {
-    setUserCart(res?.data)
-  })}
+    axios
+      ?.get(`http://192.168.29.229:5000/cart/?user_id=${token}`)
+      .then((res) => {
+        setUserCart(res?.data);
+      });
+  };
 
   useEffect(() => {
     getData();
   }, [token]);
-  
+
   const dispatch = useDispatch();
-  
+
   const removeItemOnCart = (id) => {
-    axios?.delete(`http://192.168.29.229:5000/cart/${id}`)
-    .then((res) => {
+    axios?.delete(`http://192.168.29.229:5000/cart/${id}`).then((res) => {
       dispatch(getCartdata(User));
       getData();
       toast("Product Removed");
     });
   };
-  
+
   function Increment(id, qty) {
     setButtonQuantity((prevQty) => {
       const newQty = qty + 1;
@@ -53,7 +56,7 @@ const cart = () => {
     dispatch(getCartdata(User));
     getData();
   }
-  
+
   function Decrement(id, qty) {
     setButtonQuantity((prevQty) => {
       const newQty = qty - 1;
@@ -70,9 +73,42 @@ const cart = () => {
     getData();
   }
 
+  const [coupon, setCoupon] = useState("");
+  const [coupanPrice, setCouponPrice] = useState(0);
   let cartTotal = 0;
   let prices = 0;
   let total = [];
+
+
+
+  // useEffect(() => {
+  //   const removeUser = async (id) => {
+  //     try {
+  //       if (token != undefined && User != undefined) {
+  //         if (token != User) {
+  //           // axios.patch()
+  //         }
+  //       }
+  //     } catch (error) {
+  //       alert(error)
+  //     }
+  //   }
+  //   removeUser(User);
+  // }, [User, token]);
+
+  const handleApplyCoupon = () => {
+    if (coupon === "save10") {
+      let minus = (cartTotal * 10) / 100;
+      setCouponPrice(cartTotal - minus);
+    }
+    else if (coupon === "save30") {
+      let minus = (cartTotal * 30) / 100;
+      setCouponPrice(cartTotal - minus);
+    }
+    else {
+      setCouponPrice(cartTotal);
+    }
+  }
 
   return (
     <>
@@ -104,7 +140,6 @@ const cart = () => {
                         <div className="col-md-2 d-flex justify-content-center">
                           <div>
                             <p className="small text-muted mb-4 pb-2 text-center">
-                              
                               Name
                             </p>
                             <p className="fw-normal mb-0 text-center">
@@ -115,44 +150,53 @@ const cart = () => {
                         <div className="col-md-2 d-flex justify-content-center">
                           <div>
                             <p className="small text-muted mb-4 pb-2">
+
                               Quantity
                             </p>
                             <p className="lead fw-normal mb-0 text-center d-flex justify-content-between">
-                              {
-                                User === token ?  <span
-                                className="myPointer text-center user-select-none"
-                                onClick={() =>
-                                  Decrement(
-                                    cartValues?.id,
-                                    cartValues?.item_quantity
-                                  )
-                                }
-                              >
-                                -
-                              </span> : <span className="myPointer text-center user-select-none"> - </span>
-                              }
-                             
+                              {User == token ? (
+                                <span
+                                  className="myPointer text-center user-select-none"
+                                  onClick={() =>
+                                    Decrement(
+                                      cartValues?.id,
+                                      cartValues?.item_quantity
+                                    )
+                                  }
+                                > -
+                                </span>
+                              ) : (
+                                <span className="myPointer text-center user-select-none">
+
+                                  -
+                                </span>
+                              )}
+
                               <input
                                 type="number"
                                 style={{ width: "40px" }}
                                 className="text-center"
                                 value={cartValues?.item_quantity}
                                 disabled
-                              ></input>
-                              {
-                                 User === token ? <span
-                                 className="myPointer text-center user-select-none"
-                                 onClick={() =>
-                                   Increment(
-                                     cartValues?.id,
-                                     cartValues?.item_quantity
-                                   )
-                                 }
-                               >
-                                 +
-                               </span> : <span className="myPointer text-center user-select-none"> + </span>
-                              }
-                              
+                              />
+                              {User == token ? (
+                                <span
+                                  className="myPointer text-center user-select-none"
+                                  onClick={() =>
+                                    Increment(
+                                      cartValues?.id,
+                                      cartValues?.item_quantity
+                                    )
+                                  }
+                                >
+                                  +
+                                </span>
+                              ) : (
+                                <span className="myPointer text-center user-select-none">
+
+                                  +
+                                </span>
+                              )}
                             </p>
                           </div>
                         </div>
@@ -181,15 +225,19 @@ const cart = () => {
                         <div className="col-md-2 d-flex justify-content-center">
                           <div className="text-center">
                             <p className="small text-muted mb-4 pb-2">Remove</p>
-                            {
-                              User === token ? <button
-                              className=" btn btn-outline-danger text-end"
-                              onClick={() => removeItemOnCart(cartValues?.id)}
-                            >
-                              REMOVE
-                            </button> : <button className=" btn btn-outline-danger text-end"> REMOVE </button>
-                            }
-                            
+                            {User == token ? (
+                              <button
+                                className=" btn btn-outline-danger text-end"
+                                onClick={() => removeItemOnCart(cartValues?.id)}
+                              >
+                                REMOVE
+                              </button>
+                            ) : (
+                              <button className=" btn btn-outline-danger text-end">
+
+                                REMOVE
+                              </button>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -211,13 +259,15 @@ const cart = () => {
                       <span className="small text-muted me-2">
                         Order total:
                       </span>
-                      <span className="lead fw-normal">₹{cartTotal}</span>
+                      <span className="lead fw-normal">₹{coupanPrice == 0 ? cartTotal : coupanPrice}</span>
                     </p>
                   </div>
                 </div>
               </div>
 
               <div className="d-flex justify-content-end">
+                <input type="text" className="ps-2 border-0 me-2 bg-light inputTaggged rounded" value={coupon} onChange={(e) => setCoupon(e.target.value)} placeholder="Enter Coupon..." />
+                <button onClick={() => handleApplyCoupon()} className="btn btn-light mx-2 ">Apply Coupon</button>
                 <Link href="/" type="button" className="btn btn-light me-2">
                   Continue shopping
                 </Link>
