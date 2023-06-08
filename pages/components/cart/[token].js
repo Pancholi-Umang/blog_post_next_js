@@ -14,17 +14,15 @@ import { useRouter } from "next/router";
 const cart = () => {
   const [buttonQuantity, setButtonQuantity] = useState(1);
   const User = useSelector((state) => state?.item?.login);
+  const loggerdata = useSelector((state) => state?.item?.usercart);
   const [UserCart, setUserCart] = useState([]);
   const router = useRouter();
   const { token } = router.query;
 
 
   const getData = () => {
-    axios
-      ?.get(`http://192.168.29.229:5000/cart/?user_id=${token}`)
-      .then((res) => {
-        setUserCart(res?.data);
-      });
+    axios?.get(`http://192.168.29.229:5000/cart/?user_id=${token}`)
+      .then((res) => setUserCart(res?.data));
   };
 
   useEffect(() => {
@@ -56,6 +54,16 @@ const cart = () => {
     dispatch(getCartdata(User));
     getData();
   }
+  let [change, setChange] = useState([]);
+
+  useEffect(() => {
+    UserCart?.map((data) => {
+      setChange((prev) => [...prev, {
+        item_id: data?.item_id, item_image: data?.item_image, item_price: data?.item_price,
+        item_quantity: data?.item_quantity, item_text: data?.item_text, item_title: data?.item_title, user_id: User
+      }])
+    })
+  }, [UserCart])
 
   function Decrement(id, qty) {
     setButtonQuantity((prevQty) => {
@@ -79,22 +87,37 @@ const cart = () => {
   let prices = 0;
   let total = [];
 
+  const logindata = loggerdata.map((val) => val?.id);
+  const tokendata = UserCart?.map((val) => val?.id);
 
 
-  // useEffect(() => {
-  //   const removeUser = async (id) => {
-  //     try {
-  //       if (token != undefined && User != undefined) {
-  //         if (token != User) {
-  //           // axios.patch()
-  //         }
-  //       }
-  //     } catch (error) {
-  //       alert(error)
-  //     }
-  //   }
-  //   removeUser(User);
-  // }, [User, token]);
+  useEffect(() => {
+    if (tokendata?.length !== 0) {
+      removeUser(logindata, tokendata)
+    }
+  }, [change?.length !== 0])
+
+  const removeUser = async (logindata, tokendata) => {
+    console.log(change)
+    console.log(logindata, tokendata) 
+    if (token != undefined && User != undefined) {
+      if (token != User) {
+       if (logindata?.length != 0) {
+        await Promise.all(
+          loggerdata.map(async (datas) => {
+            await axios.delete(`http://192.168.29.229:5000/cart/${datas?.id}`);
+          })
+        );
+        }
+          change?.map((val) => {
+            axios?.post(`http://192.168.29.229:5000/cart`, val)
+              .then((res) => {
+                console.log(res?.data);
+              })
+          }); 
+        }
+    }
+  }
 
   const handleApplyCoupon = () => {
     if (coupon === "save10") {
@@ -180,23 +203,10 @@ const cart = () => {
                                 disabled
                               />
                               {User == token ? (
-                                <span
-                                  className="myPointer text-center user-select-none"
-                                  onClick={() =>
-                                    Increment(
-                                      cartValues?.id,
-                                      cartValues?.item_quantity
-                                    )
-                                  }
-                                >
-                                  +
-                                </span>
-                              ) : (
-                                <span className="myPointer text-center user-select-none">
-
-                                  +
-                                </span>
-                              )}
+                                <span className="myPointer text-center user-select-none"
+                                  onClick={() => Increment(cartValues?.id, cartValues?.item_quantity)} > + </span>)
+                                : <span className="myPointer text-center user-select-none"> + </span>
+                              }
                             </p>
                           </div>
                         </div>
@@ -226,17 +236,9 @@ const cart = () => {
                           <div className="text-center">
                             <p className="small text-muted mb-4 pb-2">Remove</p>
                             {User == token ? (
-                              <button
-                                className=" btn btn-outline-danger text-end"
-                                onClick={() => removeItemOnCart(cartValues?.id)}
-                              >
-                                REMOVE
-                              </button>
+                              <button className=" btn btn-outline-danger text-end" onClick={() => removeItemOnCart(cartValues?.id)}>REMOVE</button>
                             ) : (
-                              <button className=" btn btn-outline-danger text-end">
-
-                                REMOVE
-                              </button>
+                              <button className=" btn btn-outline-danger text-end"> REMOVE </button>
                             )}
                           </div>
                         </div>

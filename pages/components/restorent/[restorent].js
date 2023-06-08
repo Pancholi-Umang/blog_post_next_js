@@ -55,7 +55,6 @@ const RestoDynamic = ({ data }) => {
 
   useEffect(() => {
     checkcondition?.map((val) => {
-      console.log(val);
       if (val?.item_id == data?.id) {
         setState(true);
         setQ(val?.item_quantity);
