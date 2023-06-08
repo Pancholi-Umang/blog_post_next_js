@@ -10,7 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 
 // this is a cart page
-
 const cart = () => {
   const [buttonQuantity, setButtonQuantity] = useState(1);
   const User = useSelector((state) => state?.item?.login);
@@ -59,6 +58,7 @@ const cart = () => {
     setButtonQuantity((prevQty) => {
       const newQty = qty + 1;
       if (newQty <= 99) {
+    
         axios.patch(`http://192.168.29.229:5000/cart/${id}`, {
           item_quantity: newQty,
         });
@@ -105,12 +105,9 @@ const cart = () => {
   const [CouponMinusValue, GetCouponMinusValue] = useState(0)
   const [NumberActive, setNumberActive] = useState(0)
 
-
   let cartTotal = 0;
   let prices = 0;
   let total = [];
-
-
 
   useEffect(() => {
     if (tokendata?.length !== 0) {
@@ -183,6 +180,7 @@ const cart = () => {
                 </span>
               </p>
               {UserCart?.map((cartValues, index) => {
+                let tot = cartValues?.item_quantity * cartValues?.item_price;  
                 return (
                   <div className="card mb-4" key={index}>
                     <div className="card-body p-4">
@@ -244,7 +242,7 @@ const cart = () => {
                               Price
                             </p>
                             <p className="lead fw-normal mb-0 text-center">
-                              ₹{cartValues?.item_price}
+                              ₹{cartValues?.item_price.toFixed(2)}
                             </p>
                           </div>
                         </div>
@@ -255,7 +253,7 @@ const cart = () => {
                             </p>
                             <p className="lead fw-normal mb-0 text-center">
                               ₹
-                              {cartValues?.item_quantity * cartValues?.item_price}
+                              {tot.toFixed(2)}
                             </p>
                           </div>
                         </div>
@@ -302,27 +300,25 @@ const cart = () => {
                       <span className="small text-muted me-2">
                         Sub total:
                       </span>
-                      <span className="lead fw-normal">₹{cartTotal}</span>
+                      <span className="lead fw-normal">₹{cartTotal.toFixed(2)}</span>
                     </p>
                     <p className="mb-0 me-5 d-flex align-items-center justify-content-evenly  px-3">
                       <span className="small text-muted me-2">
                         Coupon:
                       </span>
-                      <span className="lead fw-normal">₹{CouponMinusValue}</span>
+                      <span className="lead fw-normal">₹{CouponMinusValue.toFixed(2)}</span>
                     </p>
                     <p className="mb-0 me-5 d-flex align-items-center justify-content-evenly  px-3">
                       <span className="small text-muted me-2">
                         delivery:
                       </span>
-                      <span className="lead fw-normal">₹{NumberActive}</span>
+                      <span className="lead fw-normal">₹{NumberActive.toFixed(2)}</span>
                     </p>
                     <p className="mb-0 me-5 d-flex align-items-center justify-content-evenly  px-3">
                       <span className="small text-muted me-2">
                         Order total:
                       </span>
-                      <span className="lead fw-normal">₹{coupanPrice == 0 ? cartTotal + NumberActive : coupanPrice + NumberActive}</span>
-                      {/* aama shu karvanu chhe khabr condition to tej reva devani chhe but khali chhe ne couponprice * delivery kari devanu */}
-                      {/* <span className="lead fw-normal">₹{coupanPrice == 0 ? cartTotal + 5 : coupanPrice + 5}</span> */}
+                      <span className="lead fw-normal">₹{coupanPrice == 0 ? (cartTotal + NumberActive).toFixed(2) : (coupanPrice + NumberActive).toFixed(2)}</span>
                     </p>
 
                   </div>

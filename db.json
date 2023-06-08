@@ -130,23 +130,13 @@
   "cart": [
     {
       "item_id": 1,
-      "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-004-1.jpg",
-      "item_price": 10,
-      "item_title": "John’s Restaurant",
-      "item_text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat …",
-      "item_quantity": 1,
-      "user_id": "zealot",
-      "id": 1
-    },
-    {
-      "item_id": 1,
       "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-02.jpg",
       "item_price": 17,
       "item_title": "Spaghetti Sauce With Ground Beef",
       "item_text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
       "item_quantity": 1,
       "user_id": "zealot",
-      "id": 2
+      "id": 1
     }
   ]
 }
