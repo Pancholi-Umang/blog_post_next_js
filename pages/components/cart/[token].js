@@ -44,15 +44,16 @@ const cart = () => {
     });
   };
 
-  // aa atla mate chhe bcz jyare cart ni value ma change karva ma aave tyare coupon ni value ne remove karvani hoy chhe atle
-  useEffect(()=>{
+  // aa atla mate chhe bcz jyare cart ni value ma change karva ma aave & value cart mathi remove
+  // karvama aave tyare coupon ni value ne remove karvani hoy chhe atle
+  useEffect(() => {
     if (coupon.length != 0) {
       setCouponPrice(0);
       setCoupon("");
       GetCouponMinusValue(0)
       setidles(STATUSES?.LOADING)
     }
-  },[buttonQuantity])
+  }, [buttonQuantity,UserCart])
 
   function Increment(id, qty) {
     setButtonQuantity((prevQty) => {
@@ -108,7 +109,7 @@ const cart = () => {
   let cartTotal = 0;
   let prices = 0;
   let total = [];
-  
+
 
 
   useEffect(() => {
@@ -125,19 +126,19 @@ const cart = () => {
             loggerdata.map(async (datas) => {
               await axios.delete(`http://192.168.29.229:5000/cart/${datas?.id}`);
             })
-            );
-          }
-          change?.map((val) => {
-            axios?.post(`http://192.168.29.229:5000/cart`, val)
+          );
+        }
+        change?.map((val) => {
+          axios?.post(`http://192.168.29.229:5000/cart`, val)
             .then((res) => {
               console.log(res?.data);
             })
-          });
+        });
       }
     }
   }
- 
-  
+
+
 
   const handleApplyCoupon = () => {
     if (coupon === "save10") {
