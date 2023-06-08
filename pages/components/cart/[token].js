@@ -19,6 +19,11 @@ const cart = () => {
   const router = useRouter();
   const { token } = router.query;
 
+  const STATUSES = Object.freeze({
+    IDLE: "idle",
+    ERROR: "error",
+    LOADING: "loading",
+  });
 
   const getData = () => {
     axios?.get(`http://192.168.29.229:5000/cart/?user_id=${token}`)
@@ -38,6 +43,16 @@ const cart = () => {
       toast("Product Removed");
     });
   };
+
+  // aa atla mate chhe bcz jyare cart ni value ma change karva ma aave tyare coupon ni value ne remove karvani hoy chhe atle
+  useEffect(()=>{
+    if (coupon.length != 0) {
+      setCouponPrice(0);
+      setCoupon("");
+      GetCouponMinusValue(0)
+      setidles(STATUSES?.LOADING)
+    }
+  },[buttonQuantity])
 
   function Increment(id, qty) {
     setButtonQuantity((prevQty) => {
@@ -83,12 +98,17 @@ const cart = () => {
 
   const [coupon, setCoupon] = useState("");
   const [coupanPrice, setCouponPrice] = useState(0);
+  const logindata = loggerdata.map((val) => val?.id);
+  const tokendata = UserCart?.map((val) => val?.id);
+  const [idles, setidles] = useState(STATUSES?.LOADING)
+  const [CouponMinusValue, GetCouponMinusValue] = useState(0)
+  const [NumberActive, setNumberActive] = useState(0)
+
+
   let cartTotal = 0;
   let prices = 0;
   let total = [];
-
-  const logindata = loggerdata.map((val) => val?.id);
-  const tokendata = UserCart?.map((val) => val?.id);
+  
 
 
   useEffect(() => {
@@ -105,25 +125,19 @@ const cart = () => {
             loggerdata.map(async (datas) => {
               await axios.delete(`http://192.168.29.229:5000/cart/${datas?.id}`);
             })
-          );
-        }
-        change?.map((val) => {
-          axios?.post(`http://192.168.29.229:5000/cart`, val)
+            );
+          }
+          change?.map((val) => {
+            axios?.post(`http://192.168.29.229:5000/cart`, val)
             .then((res) => {
               console.log(res?.data);
             })
-        });
+          });
       }
     }
   }
-  const STATUSES = Object.freeze({
-    IDLE: "idle",
-    ERROR: "error",
-    LOADING: "loading",
-  });
-
-  const [idles, setidles] = useState(STATUSES?.LOADING)
-  const [CouponMinusValue, GetCouponMinusValue] = useState(0)
+ 
+  
 
   const handleApplyCoupon = () => {
     if (coupon === "save10") {
@@ -145,12 +159,10 @@ const cart = () => {
     }
   }
 
-  const [NumberActive, setNumberActive] = useState(0)
-
   const handleChhoseDelivery = (price) => {
     setNumberActive(price)
   }
-  
+
   return (
     <>
       <Head>

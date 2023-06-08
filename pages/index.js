@@ -22,7 +22,6 @@ function index() {
           src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js"
           crossorigin
         ></script>
-        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
       </Head>
       <div>
         <Home />
