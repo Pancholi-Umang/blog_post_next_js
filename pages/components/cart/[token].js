@@ -24,7 +24,8 @@ const cart = () => {
     ERROR: "error",
     LOADING: "loading",
   });
-
+  
+  
   const getData = () => {
     axios?.get(`http://192.168.29.229:5000/cart/?user_id=${token}`)
       .then((res) => setUserCart(res?.data));
@@ -43,7 +44,6 @@ const cart = () => {
       toast("Product Removed");
     });
   };
-
   // aa atla mate chhe bcz jyare cart ni value ma change karva ma aave & value cart mathi remove
   // karvama aave tyare coupon ni value ne remove karvani hoy chhe atle
   useEffect(() => {
@@ -53,7 +53,7 @@ const cart = () => {
       GetCouponMinusValue(0)
       setidles(STATUSES?.LOADING)
     }
-  }, [buttonQuantity,UserCart])
+  }, [buttonQuantity, UserCart])
 
   function Increment(id, qty) {
     setButtonQuantity((prevQty) => {
@@ -131,7 +131,7 @@ const cart = () => {
         change?.map((val) => {
           axios?.post(`http://192.168.29.229:5000/cart`, val)
             .then((res) => {
-              console.log(res?.data);
+              router.push(`http://192.168.29.229:3000/components/cart/${User}`)
             })
         });
       }
@@ -172,7 +172,10 @@ const cart = () => {
       <section className="vh-100">
         <Container className="mt-5">
           <Row className=" d-flex justify-content-center align-items-center h-100">
-            <Col>
+            <div className={UserCart?.length != 0 ? "d-none" : "text-center"}>
+              <h1>Cart is Empty !</h1>
+            </div>
+            <Col className={UserCart?.length == 0 ? "d-none" : ""}>
               <p>
                 <span className="h2">Shopping Cart </span>
                 <span className="h4">
@@ -252,8 +255,7 @@ const cart = () => {
                             </p>
                             <p className="lead fw-normal mb-0 text-center">
                               ₹
-                              {cartValues?.item_quantity *
-                                cartValues?.item_price}
+                              {cartValues?.item_quantity * cartValues?.item_price}
                             </p>
                           </div>
                         </div>

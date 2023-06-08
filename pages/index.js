@@ -2,7 +2,6 @@ import Head from "next/head";
 import Home from "./components/home";
 
 function index() {
-
   return (
     <>
       <Head>

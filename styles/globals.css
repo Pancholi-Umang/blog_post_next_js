@@ -167,10 +167,3 @@ input[type=number] {
   width: 120px !important;
   height: 120px !important;
 }
-
-/* @media (max-width:768px) {
-  .btn-sq-lg {
-    width: 100px !important;
-    height: 100px !important;
-  }
-} */
