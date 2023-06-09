@@ -101,14 +101,15 @@ const cart = () => {
     dispatch(getCartdata(User));
     getData();
   }
-
-  const [coupon, setCoupon] = useState("");
-  const [coupanPrice, setCouponPrice] = useState(0);
+  
   const logindata = loggerdata.map((val) => val?.id);
   const tokendata = UserCart?.map((val) => val?.id);
-  const [idles, setidles] = useState(STATUSES?.LOADING)
-  const [CouponMinusValue, GetCouponMinusValue] = useState(0)
-  const [NumberActive, setNumberActive] = useState(0)
+  const [coupon, setCoupon] = useState(""); // coupon na input ni value shiw karavva mate chhe
+  const [coupanPrice, setCouponPrice] = useState(0); // coupon ni price  minus thata ketli value chhe te mate
+  const [CouponMinusValue, GetCouponMinusValue] = useState(0) // coupon thi ketli price minus thai te value chhe
+  const [NumberActive, setNumberActive] = useState(0) // 3 box mate chhe
+  const [getValueReduce, setGetValueReduce] = useState(0) // cart ni total value mate chhe
+  const [idles, setidles] = useState(STATUSES?.LOADING)  // status check kare chhe coupon nu title batavva mate
 
 
 
@@ -164,7 +165,6 @@ const cart = () => {
     setNumberActive(price)
   }
 
-  const [getValueReduce, setGetValueReduce] = useState(0)
   let total = [];
 
   useEffect(() => {
