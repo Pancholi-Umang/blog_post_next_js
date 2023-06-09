@@ -23,10 +23,9 @@ const cart = () => {
     ERROR: "error",
     LOADING: "loading",
   });
-  
-  
-  const getData = () => {
-    axios?.get(`http://192.168.29.229:5000/cart/?user_id=${token}`)
+
+  const getData = async () => {
+    await axios?.get(`http://192.168.29.229:5000/cart/?user_id=${token}`)
       .then((res) => setUserCart(res?.data));
   };
 
@@ -45,25 +44,31 @@ const cart = () => {
   };
   // aa atla mate chhe bcz jyare cart ni value ma change karva ma aave & value cart mathi remove
   // karvama aave tyare coupon ni value ne remove karvani hoy chhe atle
-  useEffect(() => {
-    if (coupon.length != 0) {
-      setCouponPrice(0);
-      setCoupon("");
-      GetCouponMinusValue(0)
-      setidles(STATUSES?.LOADING)
-    }
-  }, [buttonQuantity, UserCart])
+  // useEffect(() => {
+  //   if (coupon == "save10") {
+  //     setCouponPrice(10);
+  //     setCoupon("");
+  //     GetCouponMinusValue(10)
+  //     setidles(STATUSES?.LOADING)
+  //   }
+  // }, [buttonQuantity, UserCart])
 
   function Increment(id, qty) {
     setButtonQuantity((prevQty) => {
-      const newQty = qty + 1;
-      if (newQty <= 99) {
-    
+      let newQty = qty + 1;
+      if (newQty <= 99 && coupon == "save10") {
+        axios.patch(`http://192.168.29.229:5000/cart/${id}`, {
+          item_quantity: newQty,
+        })
+        return newQty;
+      }
+      else if (newQty <= 99 && coupon != "save10") {
         axios.patch(`http://192.168.29.229:5000/cart/${id}`, {
           item_quantity: newQty,
         });
         return newQty;
-      } else {
+      }
+      else {
         return prevQty;
       }
     });
@@ -83,7 +88,7 @@ const cart = () => {
 
   function Decrement(id, qty) {
     setButtonQuantity((prevQty) => {
-      const newQty = qty - 1;
+      let newQty = qty - 1;
       if (newQty >= 1) {
         axios.patch(`http://192.168.29.229:5000/cart/${id}`, {
           item_quantity: newQty,
@@ -105,9 +110,7 @@ const cart = () => {
   const [CouponMinusValue, GetCouponMinusValue] = useState(0)
   const [NumberActive, setNumberActive] = useState(0)
 
-  let cartTotal = 0;
-  let prices = 0;
-  let total = [];
+
 
   useEffect(() => {
     if (tokendata?.length !== 0) {
@@ -139,19 +142,19 @@ const cart = () => {
 
   const handleApplyCoupon = () => {
     if (coupon === "save10") {
-      let minus = (cartTotal * 10) / 100;
-      GetCouponMinusValue((cartTotal * 10) / 100)
-      setCouponPrice(cartTotal - minus);
+      let minus = (getValueReduce * 10) / 100;
+      GetCouponMinusValue((getValueReduce * 10) / 100)
+      setCouponPrice(getValueReduce - minus);
       setidles(STATUSES?.IDLE)
     }
     else if (coupon === "save30") {
-      let minus = (cartTotal * 30) / 100;
-      GetCouponMinusValue((cartTotal * 30) / 100)
-      setCouponPrice(cartTotal - minus);
+      let minus = (getValueReduce * 30) / 100;
+      GetCouponMinusValue((getValueReduce * 30) / 100)
+      setCouponPrice(getValueReduce - minus);
       setidles(STATUSES?.IDLE)
     }
     else {
-      setCouponPrice(cartTotal);
+      setCouponPrice(getValueReduce);
       setidles(STATUSES?.ERROR)
       GetCouponMinusValue(0)
     }
@@ -160,6 +163,25 @@ const cart = () => {
   const handleChhoseDelivery = (price) => {
     setNumberActive(price)
   }
+
+  const [getValueReduce, setGetValueReduce] = useState(0)
+  let total = [];
+
+  useEffect(() => {
+    UserCart?.map((data) => {
+      let prices = Number(data.item_price * data.item_quantity);
+      total.push(prices);
+      setGetValueReduce(total.reduce((result, number) => result + number));
+    })
+    if (coupon == "save10") {
+      GetCouponMinusValue((getValueReduce * 10) / 100)
+      setCouponPrice(getValueReduce - (getValueReduce * 10) / 100);
+    }else if(coupon == "save10"){
+      GetCouponMinusValue((getValueReduce * 30) / 100)
+      setCouponPrice(getValueReduce - (getValueReduce * 30) / 100);
+    }
+  }, [UserCart, getValueReduce])
+
 
   return (
     <>
@@ -180,7 +202,7 @@ const cart = () => {
                 </span>
               </p>
               {UserCart?.map((cartValues, index) => {
-                let tot = cartValues?.item_quantity * cartValues?.item_price;  
+                let tot = cartValues?.item_quantity * cartValues?.item_price;
                 return (
                   <div className="card mb-4" key={index}>
                     <div className="card-body p-4">
@@ -273,11 +295,7 @@ const cart = () => {
                 );
               })}
 
-              {UserCart?.map((data) => {
-                prices = Number(data.item_price * data.item_quantity);
-                total.push(prices);
-                cartTotal += prices;
-              }, [])}
+
 
               <div className="card mb-5">
                 <div className="card-body p-4 d-flex align-items-center justify-content-between row">
@@ -300,7 +318,7 @@ const cart = () => {
                       <span className="small text-muted me-2">
                         Sub total:
                       </span>
-                      <span className="lead fw-normal">₹{cartTotal.toFixed(2)}</span>
+                      <span className="lead fw-normal">₹{getValueReduce.toFixed(2)}</span>
                     </p>
                     <p className="mb-0 me-5 d-flex align-items-center justify-content-evenly  px-3">
                       <span className="small text-muted me-2">
@@ -318,7 +336,7 @@ const cart = () => {
                       <span className="small text-muted me-2">
                         Order total:
                       </span>
-                      <span className="lead fw-normal">₹{coupanPrice == 0 ? (cartTotal + NumberActive).toFixed(2) : (coupanPrice + NumberActive).toFixed(2)}</span>
+                      <span className="lead fw-normal">₹{coupanPrice == 0 ? (getValueReduce + NumberActive).toFixed(2) : (coupanPrice + NumberActive).toFixed(2)}</span>
                     </p>
 
                   </div>
