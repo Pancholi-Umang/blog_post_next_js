@@ -5,7 +5,8 @@ export const signupSchema = Yup.object({
   lastname: Yup.string().min(2).max(10).required("Last Name Field is Require"),
   email: Yup.string().email().required("Please Enter Valid Email"),
   address: Yup.string().min(20).max(100).required("Address Field is Require"),
-  countrys: Yup.string().required("please Select The Country"),
-  states: Yup.string().required("please Select The State"),
+  countrys: Yup.string().required("Please Select The Country"),
+  states: Yup.string().required("Please Select The State"),
+  cities: Yup.string().required("Please Select The City"),
   zip: Yup.number().required("ZIP code is required"),
 });

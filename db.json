@@ -157,6 +157,26 @@
       "item_quantity": 3,
       "user_id": "zag",
       "id": 3
+    },
+    {
+      "item_id": 1,
+      "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-004-1.jpg",
+      "item_price": 10,
+      "item_quantity": 1,
+      "item_text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat …",
+      "item_title": "John’s Restaurant",
+      "user_id": "yuki",
+      "id": 4
+    },
+    {
+      "item_id": 2,
+      "item_image": "https://websitedemos.net/food-drinks-blog-04/wp-content/uploads/sites/896/2021/06/blog-08.jpg",
+      "item_price": 11,
+      "item_quantity": 1,
+      "item_text": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "item_title": "20 Easy Vodka Drinks ",
+      "user_id": "yuki",
+      "id": 5
     }
   ],
   "checkoutdetails": [
@@ -171,28 +191,33 @@
         11
       ],
       "subtotal": 21,
-      "minusUsingCoupon": 2.1,
+      "minusUsingCoupon": 6.3,
       "boxSelectPrice": 10,
       "quantity": [
         1,
         1
       ],
+      "cou_pon": "save30",
       "id": 1
     },
     {
-      "user_id": "zag",
+      "user_id": "yuki",
       "title": [
+        "John’s Restaurant",
         "20 Easy Vodka Drinks "
       ],
       "price": [
+        10,
         11
       ],
-      "subtotal": 33,
-      "minusUsingCoupon": 9.9,
-      "boxSelectPrice": 10,
+      "subtotal": 109,
+      "minusUsingCoupon": 10.9,
+      "boxSelectPrice": 0,
       "quantity": [
-        3
+        1,
+        9
       ],
+      "cou_pon": "save10",
       "id": 2
     }
   ]

@@ -228,12 +228,13 @@ const cart = () => {
           minusUsingCoupon: CouponMinusValue,
           boxSelectPrice: NumberActive,
           quantity: name_quantity,
+          cou_pon : coupon_local,
         })
         .then((res) => {
           router.push(`/components/checkout/${User}`);
         });
-    } else {
-      axios
+      } else {
+        axios
         .patch(
           `http://192.168.29.229:5000/checkoutdetails/${checkoutdetails[0]?.id}`,
           {
@@ -244,6 +245,7 @@ const cart = () => {
             minusUsingCoupon: CouponMinusValue,
             boxSelectPrice: NumberActive,
             quantity: name_quantity,
+            cou_pon : coupon_local,
           }
         )
         .then((res) => {

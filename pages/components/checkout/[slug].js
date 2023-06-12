@@ -12,23 +12,56 @@ const initialValues = {
   address: "",
   countrys: "",
   states: "",
+  cities: "",
   zip: "",
 };
 
 const Checkout = () => {
-  const country = [
-    { label: "INDIA", value: "ind" },
-    { label: "UNITED STATE", value: "us" },
-    { label: "UNITED KINGDOM", value: "uk" },
-    { label: "PAKISTAN", value: "pak" },
-  ];
+  const [selectCountry, setSelectCountry] = useState({
+    countries: [
+      {
+        name: 'Germany',
+        states: [
+          { name: 'Bavaria', cities: ['Frankfurt am Main', 'Munich', 'Berlin', 'Stuggrat', 'Leinfelden-Mangoes', 'Drassend'] },
+          { name: 'Hesse', cities: ['Duesseldorf', 'Leinfelden', 'Colung'] },
+          { name: 'Saxony', cities: ['Drawddf', 'Essen', 'Dortmund'] },
+          { name: 'Thuringia', cities: ['Duesseldorf', 'Leinfelden', 'Echterdingen'] },
+          { name: 'Hamburg', cities: ['berendofff', 'Leinfelden-Echterdingen', 'Eschborn'] },
+        ]
+      },
+      {
+        name: 'Spain',
+        states: [
+          { name: 'Bhumla', cities: ['Barcelona', 'Mrunghr'] },
+          { name: 'Nalvas', cities: ['Leinfelden', 'Loremsss', 'Spains1'] },
+          { name: 'Richest', cities: ['Spainsrich', 'Spainsrich2', 'Spainsrich3'] }
+        ]
+      },
+      {
+        name: 'USA',
+        states: [
+          { name: 'NEW-YORK', cities: ['Fort Worth', 'Columbus', 'sungrove'] },
+          { name: 'CHICAGO', cities: ['San Antonio', 'Philadelphia', 'Phoenix'] },
+          { name: 'LONDON', cities: ['Dallas', 'San Jose', 'Austin', 'Jacksonville'] }
+        ]
+      },
+      {
+        name: 'Mexico',
+        states: [
+          { name: 'Aguascalientes', cities: ['Tijuana', 'Saltillo', 'Colima'] },
+          { name: 'Chiapas', cities: ['Morelos', 'Jalisco', 'Guerrero'] },
+        ]
+      },
+      {
+        name: 'India',
+        states: [
+          { name: 'Gujrat', cities: ['Surat', 'Vadodra', 'Ahemdabad'] },
+          { name: 'Maharastra', cities: ['Mumbai', 'Bangalore', 'Kolkata'] },
+        ]
+      },
+    ]
+  })
 
-  const state = [
-    { label: "GUJRAT", value: "gj" },
-    { label: "DELHI", value: "dl" },
-    { label: "RAJASTAN", value: "rj" },
-    { label: "MAHARASTRA", value: "mh" },
-  ];
   const [userName, setUsername] = useState("");
 
   const { values, errors, touched, resetForm, handleChange, handleBlur, handleSubmit } = useFormik({
@@ -64,6 +97,7 @@ const Checkout = () => {
     );
   }, [Checkoutdetails]);
 
+  const { countrys, states, cities } = values
 
   return (
     <div className="container">
@@ -85,9 +119,8 @@ const Checkout = () => {
                       <h6 className="my-0">{val}</h6>
                     </div>
                     <span className="text-muted">
-                      ₹{Checkoutdetails?.price[ind]} x {Checkoutdetails?.quantity[ind]} = ₹
-                      {Checkoutdetails?.price[ind] *
-                        Checkoutdetails?.quantity[ind]}
+                      ₹{Checkoutdetails?.price[ind].toFixed(2)} x {Checkoutdetails?.quantity[ind]} = ₹
+                      {(Checkoutdetails?.price[ind] * Checkoutdetails?.quantity[ind]).toFixed(2)}
                     </span>
                   </li>
                 </span>
@@ -96,15 +129,15 @@ const Checkout = () => {
 
             <li className="list-group-item d-flex justify-content-between">
               <span>Sub-total</span>
-              <strong>₹{Checkoutdetails?.subtotal}</strong>
+              <strong>₹{Number(Checkoutdetails?.subtotal).toFixed(2)}</strong>
             </li>
 
             <li className="list-group-item d-flex justify-content-between bg-light">
               <div className="text-success">
-                <h6 className="my-0">Promo code</h6>
+                <h6 className="my-0">Promo code({Checkoutdetails?.cou_pon})</h6>
               </div>
               <span className="text-success">
-                -₹{Checkoutdetails?.minusUsingCoupon}
+                -₹{Number(Checkoutdetails?.minusUsingCoupon).toFixed(2)}
               </span>
             </li>
             <li className="list-group-item d-flex justify-content-between bg-light">
@@ -112,12 +145,12 @@ const Checkout = () => {
                 <h6 className="my-0">delivery</h6>
               </div>
               <span className="text-danger">
-                +₹{Checkoutdetails?.boxSelectPrice}
+                +₹{Number(Checkoutdetails?.boxSelectPrice).toFixed(2)}
               </span>
             </li>
             <li className="list-group-item d-flex justify-content-between">
               <span>Total (IND)</span>
-              <strong>₹{totalState}</strong>
+              <strong>₹{totalState.toFixed(2)}</strong>
             </li>
           </ul>
         </div>
@@ -170,7 +203,7 @@ const Checkout = () => {
                   className="form-control"
                   id="username"
                   placeholder="Username"
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e) => setUsername(e?.target?.value)}
                   value={userName}
                 />
                 <div style={{ width: "100%" }}></div>
@@ -213,8 +246,11 @@ const Checkout = () => {
               </div>
             </div>
 
+
+
+
             <div className="row">
-              <div className="col-md-5 mb-3">
+              <div className="col-md-3 mb-3">
                 <label htmlFor="country">Country</label>
                 <select
                   className="custom-select d-block w-100"
@@ -224,10 +260,10 @@ const Checkout = () => {
                   id="country"
                   name="countrys"
                 >
-                  <option value="">please Select..</option>
-                  {country.map((options) => (
-                    <option key={options.value} value={options.value}>
-                      {options.label}
+                  <option value="" >Please Select..</option>
+                  {selectCountry?.countries?.map((options, ind) => (
+                    <option key={ind} value={options.name}>
+                      {options?.name}
                     </option>
                   ))}
                 </select>
@@ -237,22 +273,19 @@ const Checkout = () => {
                   ) : null}
                 </div>
               </div>
-              <div className="col-md-4 mb-3">
+
+              <div className="col-md-3 mb-3">
                 <label htmlFor="state">State</label>
-                <select
-                  className="custom-select d-block w-100"
-                  id="state"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values?.states}
-                  name="states"
-                >
-                  <option value="">please Select..</option>
-                  {state.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
+                <select className="custom-select d-block w-100" id="state" onBlur={handleBlur} onChange={handleChange} value={values?.states} name="states" >
+                  <option className="visiblity-hidden" value="">Please Select..</option>
+                  {countrys &&
+                    selectCountry?.countries?.find((country) => country.name === countrys)
+                      ?.states.map((state, index) => (
+                        <option key={index} value={state?.name}>
+                          {state?.name}
+                        </option>
+                      ))
+                  }
                 </select>
                 <div>
                   {errors?.states && touched?.states ? (
@@ -260,6 +293,35 @@ const Checkout = () => {
                   ) : null}
                 </div>
               </div>
+
+              <div className="col-md-3 mb-3">
+                <label htmlFor="cities">City</label>
+                <select
+                  className="custom-select d-block w-100"
+                  id="cities"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values?.cities}
+                  name="cities"
+                >
+                  <option value="">Please Select..</option>
+                  {countrys &&
+                    selectCountry?.countries?.find((country) => country?.name === countrys)
+                      ?.states.find((state) => state.name === states)
+                      ?.cities.map((city, index) => (
+                        <option key={index} value={city}>
+                          {city}
+                        </option>
+                      ))
+                  }
+                </select>
+                <div>
+                  {errors?.cities && touched?.cities ? (
+                    <p className="form-error"> {errors?.cities} </p>
+                  ) : null}
+                </div>
+              </div>
+
               <div className="col-md-3 mb-3">
                 <label htmlFor="zip">Zip</label>
                 <input
