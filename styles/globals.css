@@ -167,3 +167,9 @@ input[type=number] {
   width: 120px !important;
   height: 120px !important;
 }
+
+.custom-select{
+  height: 37px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
