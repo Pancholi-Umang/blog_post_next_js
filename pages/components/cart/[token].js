@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 
 // this is a cart page
 
-const delivery_date = () => {
+const delivery_price = () => {
   if (typeof window !== "undefined") {
     return localStorage.getItem("deliveryDate");
   }
@@ -36,6 +36,7 @@ const cart = () => {
     ERROR: "error",
     LOADING: "loading",
   });
+
 
   const getData = async () => {
     await axios
@@ -96,6 +97,8 @@ const cart = () => {
     });
   }, [UserCart]);
 
+ 
+
   function Decrement(id, qty) {
     setButtonQuantity((prevQty) => {
       let newQty = qty - 1;
@@ -129,6 +132,15 @@ const cart = () => {
     }
   }, [change?.length !== 0]);
 
+  let coupon_local = delivery_coupon();
+  let delivery_local = delivery_price();
+
+  useEffect(()=>{
+    setCoupon(coupon_local);
+    setNumberActive(Number(delivery_local))
+  },[])
+
+
   const removeUser = async (logindata) => {
     if (token != undefined && User != undefined) {
       if (token != User) {
@@ -149,10 +161,6 @@ const cart = () => {
       }
     }
   };
-  // useEffect(()=>{
-  //   setNumberActive(delivery_date());
-  //   setCoupon(delivery_coupon());
-  // },[UserCart])
 
   const handleApplyCoupon = () => {
     if (coupon === "save10") {

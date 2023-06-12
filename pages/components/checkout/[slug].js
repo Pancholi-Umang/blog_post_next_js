@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { signupSchema } from "../../../schemas/checkout";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 const initialValues = {
   firstname: "",
@@ -30,14 +31,17 @@ const Checkout = () => {
   ];
   const [userName, setUsername] = useState("");
 
-  const { values, errors, touched, resetForm, handleChange, handleBlur, handleSubmit} = useFormik({
+  const { values, errors, touched, resetForm, handleChange, handleBlur, handleSubmit } = useFormik({
     initialValues,
     validationSchema: signupSchema,
     onSubmit: (values) => {
+      console.log(values)
       resetForm();
       setUsername("");
     },
   });
+
+  const User = useSelector((state) => state?.item?.login);
 
   const [Checkoutdetails, setCheckoutdetails] = useState([]);
   const router = useRouter();
@@ -55,23 +59,21 @@ const Checkout = () => {
   useEffect(() => {
     setTotalState(
       Checkoutdetails?.subtotal -
-        Checkoutdetails?.minusUsingCoupon +
-        Checkoutdetails?.boxSelectPrice
+      Checkoutdetails?.minusUsingCoupon +
+      Checkoutdetails?.boxSelectPrice
     );
   }, [Checkoutdetails]);
+
 
   return (
     <div className="container">
       <div className="py-5 text-center">
-        <h2>Checkout form</h2>
+        <h2> Checkout form </h2>
       </div>
-      <div className="row">
+      <div className={User == slug ? "row" : "d-none"}>
         <div className="col-md-4 order-md-2 mb-4">
           <h4 className="d-flex justify-content-between align-items-center mb-3">
-            <span className="text-muted">Your cart</span>
-            <span className="badge text-dark">
-              {Checkoutdetails?.title?.length}
-            </span>
+            <span className="text-muted">Total {Checkoutdetails?.title?.length} items in Your cart</span>
           </h4>
 
           <ul className="list-group mb-3">
@@ -83,7 +85,9 @@ const Checkout = () => {
                       <h6 className="my-0">{val}</h6>
                     </div>
                     <span className="text-muted">
-                      ₹{Checkoutdetails?.price[ind]}x{Checkoutdetails?.quantity[ind]} = ₹{Checkoutdetails?.price[ind] * Checkoutdetails?.quantity[ind]}
+                      ₹{Checkoutdetails?.price[ind]} x {Checkoutdetails?.quantity[ind]} = ₹
+                      {Checkoutdetails?.price[ind] *
+                        Checkoutdetails?.quantity[ind]}
                     </span>
                   </li>
                 </span>
